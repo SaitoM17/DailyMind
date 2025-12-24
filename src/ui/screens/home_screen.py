@@ -22,6 +22,10 @@ class DashboarPrincial(ft.Container):
         self.numero_tareas_pendientes = ft.Text(value='0')
         self.texto_tareas_pendientes = ft.Text(value='Tareas Pendientes')
 
+        # Contenedor 8
+        self.boton_habitos = ft.FloatingActionButton(text='Hábito',icon=ft.Icons.SWAP_HORIZ)
+        self.boton_tareas = ft.FloatingActionButton(text='Nueva Tarea', icon=ft.Icons.ADD)
+
         self.content = ft.SafeArea(
             ft.Column([
                 ft.Row(
@@ -67,6 +71,18 @@ class DashboarPrincial(ft.Container):
                             controls=[
                                 ft.Container(self.numero_tareas_pendientes),
                                 ft.Container(self.texto_tareas_pendientes)
+                            ]
+                        )
+                    ]
+                ),
+                ft.Row(
+                    spacing=20,
+                    controls=[
+                        ft.Column(
+                            spacing=20,
+                            controls=[
+                                ft.Container(self.boton_habitos),
+                                ft.Container(self.boton_tareas)
                             ]
                         )
                     ]
