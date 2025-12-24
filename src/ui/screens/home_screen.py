@@ -26,6 +26,20 @@ class DashboarPrincial(ft.Container):
         self.boton_habitos = ft.FloatingActionButton(text='Hábito',icon=ft.Icons.SWAP_HORIZ)
         self.boton_tareas = ft.FloatingActionButton(text='Nueva Tarea', icon=ft.Icons.ADD)
 
+        # Contenedor 9
+        self.navegador_bar = ft.NavigationBar(
+            destinations=[
+                    ft.NavigationBarDestination(icon=ft.Icons.HOME, label="Incio"),
+                    ft.NavigationBarDestination(icon=ft.Icons.TASK, label="Tareas"),
+                    ft.NavigationBarDestination(icon=ft.Icons.TRACK_CHANGES,label="Hábitos"),
+                    ft.NavigationBarDestination(icon=ft.Icons.ANALYTICS, label='Estadística')
+                ],
+            border=ft.Border(
+                top=ft.BorderSide(color=ft.CupertinoColors.SYSTEM_GREY2, width=0)
+            ),
+        )
+
+
         self.content = ft.SafeArea(
             ft.Column([
                 ft.Row(
@@ -86,6 +100,7 @@ class DashboarPrincial(ft.Container):
                             ]
                         )
                     ]
-                )
+                ),
+                self.navegador_bar
             ])
         )
