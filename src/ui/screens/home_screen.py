@@ -23,8 +23,36 @@ class DashboarPrincial(ft.Container):
         self.texto_tareas_pendientes = ft.Text(value='Tareas Pendientes')
 
         # Contenedor 8
-        self.boton_habitos = ft.FloatingActionButton(text='Hábito',icon=ft.Icons.SWAP_HORIZ)
-        self.boton_tareas = ft.FloatingActionButton(text='Nueva Tarea', icon=ft.Icons.ADD)
+        self.boton_habitos = ft.ElevatedButton(
+            content=ft.Row(
+                [
+                    ft.Text(value="Hábito", size=16),
+                    ft.Icon(name=ft.Icons.SWAP_HORIZ),
+                ],
+                tight=True,
+                spacing=10,
+            ),
+            style=ft.ButtonStyle(
+                color=ft.Colors.BLACK,
+                bgcolor="#ffffff",
+                shape=ft.RoundedRectangleBorder(radius=15),
+            ),
+        )
+        self.boton_tareas = ft.ElevatedButton(
+            content=ft.Row(
+                [
+                    ft.Text(value='Nueva Tarea', size=18),
+                    ft.Icon(name=ft.Icons.ADD)
+                ],
+                tight=True,
+                spacing=10
+            ),
+            style=ft.ButtonStyle(
+                color=ft.Colors.BLACK,
+                bgcolor="#ffffff",
+                shape=ft.RoundedRectangleBorder(radius=15),
+            ),
+        )
 
         # Contenedor 9
         self.navegador_bar = ft.NavigationBar(
