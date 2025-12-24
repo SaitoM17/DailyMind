@@ -9,7 +9,12 @@ class DashboarPrincial(ft.Container):
 
         #Contenidor 1
         self.texto_bienvenida = ft.Text(value='Hola, Said')
-        self.configuracion = ft.Text(value='Icono de configuración')
+        self.boton_configuracion = ft.IconButton(
+            icon=ft.Icons.SETTINGS,
+            icon_color=ft.Colors.BLACK,
+            bgcolor="#ffffff",
+            icon_size=30,
+        )
 
         # Contenedor 3
         self.dias_racha = ft.Text(value='0')
@@ -82,7 +87,7 @@ class DashboarPrincial(ft.Container):
                         ft.Column(
                             spacing=20,
                             controls=[
-                                ft.Container(self.configuracion)
+                                ft.Container(self.boton_configuracion, padding=0)
                             ]
                         )
                     ]
