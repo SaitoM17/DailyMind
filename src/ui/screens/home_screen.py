@@ -17,11 +17,10 @@ class DashboarPrincial(ft.Container):
         )
 
         # Contenedor 3
-        self.dias_racha = ft.Text(value='0')
-        self.texto_dias_racha = ft.Text(value='Días Racha')
+        self.dias_racha = ft.Text(value=f'🔥{0} Días Racha')
 
         # Contenedor 4
-        self.fecha_actual = ft.Text(value='\nMié,24 Dic')
+        self.fecha_actual = ft.Text(value='Mié,24 Dic')
 
         # Contenedor 5 
         self.numero_tareas_pendientes = ft.Text(value='0')
@@ -124,8 +123,7 @@ class DashboarPrincial(ft.Container):
                         ft.Column(
                             spacing=0,
                             controls=[
-                                ft.Container(self.dias_racha),
-                                ft.Container(self.texto_dias_racha)
+                                ft.Container(self.dias_racha)
                             ]
                         ),
                         ft.Column(
