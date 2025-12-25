@@ -1,4 +1,6 @@
 import flet as ft
+import locale
+from datetime import datetime
 
 class DashboarPrincial(ft.Container):
     
@@ -30,7 +32,23 @@ class DashboarPrincial(ft.Container):
         )
 
         # Contenedor 4
-        self.fecha_actual = ft.Text(value='Mié,24 Dic')
+        try:
+            locale.setlocale(locale.LC_TIME, 'es_ES.utf8') 
+        except:
+            locale.setlocale(locale.LC_TIME, 'spanish')
+
+        self.ahora = datetime.now()
+        self.ahora_formateado = self.ahora.strftime("%a, %d, %b")
+        self.fecha_actual = ft.Text(value=f'  📅  {self.ahora_formateado}  ', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK)
+        self.fecha = ft.Container(
+            content=self.fecha_actual,
+            margin=0,
+            padding=2,
+            alignment=ft.alignment.center,
+            bgcolor=ft.Colors.WHITE,
+            height=36,
+            border_radius=15
+        )
 
         # Contenedor 5 
         self.numero_tareas_pendientes = ft.Text(value='0')
@@ -139,7 +157,7 @@ class DashboarPrincial(ft.Container):
                         ft.Column(
                             spacing=20,
                             controls=[
-                                ft.Container(self.fecha_actual)
+                                ft.Container(self.fecha)
                             ]
                         )
                     ]
