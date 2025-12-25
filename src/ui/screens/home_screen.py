@@ -219,21 +219,6 @@ class DashboarPrincial(ft.Container):
                     ],
                     spacing=20,
                     run_spacing=20
-                    # spacing=20,
-                    # controls=[
-                    #     ft.Column(
-                    #         spacing=0,
-                    #         controls=[
-                    #             ft.Container(self.tareas_pendientes)
-                    #         ]
-                    #     ),
-                    #     ft.Column(
-                    #         spacing=0,
-                    #         controls=[
-                    #             ft.Container(self.habitos_pendientes)
-                    #         ]
-                    #     )
-                    # ]
                 ),
                 ft.Row(
                     spacing=20,
