@@ -74,6 +74,7 @@ class DashboarPrincial(ft.Container):
             width=140,
             height=90,
             border_radius=15,
+            col={"xs": 6, "md": 6, "lg": 4}
         )
 
         # Contenedor 6 
@@ -100,6 +101,7 @@ class DashboarPrincial(ft.Container):
             width=140,
             height=90,
             border_radius=15,
+            col={"xs": 6, "md": 6, "lg": 4}
         )
 
         # Contenedor 7
@@ -210,22 +212,28 @@ class DashboarPrincial(ft.Container):
                         )
                     ]
                 ),
-                ft.Row(
-                    spacing=20,
+                ft.ResponsiveRow(
                     controls=[
-                        ft.Column(
-                            spacing=0,
-                            controls=[
-                                ft.Container(self.tareas_pendientes)
-                            ]
-                        ),
-                        ft.Column(
-                            spacing=0,
-                            controls=[
-                                ft.Container(self.habitos_pendientes)
-                            ]
-                        )
-                    ]
+                        self.tareas_pendientes,
+                        self.habitos_pendientes
+                    ],
+                    spacing=20,
+                    run_spacing=20
+                    # spacing=20,
+                    # controls=[
+                    #     ft.Column(
+                    #         spacing=0,
+                    #         controls=[
+                    #             ft.Container(self.tareas_pendientes)
+                    #         ]
+                    #     ),
+                    #     ft.Column(
+                    #         spacing=0,
+                    #         controls=[
+                    #             ft.Container(self.habitos_pendientes)
+                    #         ]
+                    #     )
+                    # ]
                 ),
                 ft.Row(
                     spacing=20,
