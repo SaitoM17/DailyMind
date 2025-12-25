@@ -105,7 +105,7 @@ class DashboarPrincial(ft.Container):
         )
 
         # Contenedor 7
-
+        self.proximas_tareas = ft.Text(value='Próximas Tareas', size=25, weight=ft.FontWeight.BOLD,)
 
         # Contenedor 8
         self.boton_habitos = ft.ElevatedButton(
@@ -197,6 +197,7 @@ class DashboarPrincial(ft.Container):
                     spacing=20,
                     run_spacing=20
                 ),
+                self.proximas_tareas,
                 ft.Row(
                     spacing=20,
                     controls=[
