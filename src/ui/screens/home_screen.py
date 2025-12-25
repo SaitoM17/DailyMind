@@ -76,6 +76,32 @@ class DashboarPrincial(ft.Container):
             border_radius=15,
         )
 
+        # Contenedor 6 
+        self.icono_habitos = ft.Text(value='🔃', size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK)
+        self.numero_habitos_pendientes = ft.Text('4/7', size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK)
+        self.texto_habitos_pendientes = ft.Text(value='Hábitos', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK)
+        
+        self.habitos_pendientes = ft.Container(
+            content=ft.Column(
+                alignment=ft.MainAxisAlignment.CENTER,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                controls=[
+                    ft.Row(
+                        alignment=ft.MainAxisAlignment.CENTER,
+                        vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                        controls=[self.icono_habitos,self.numero_habitos_pendientes]), 
+                    self.texto_habitos_pendientes
+                    ]
+                ),
+            margin=0,
+            padding=2,
+            alignment=ft.alignment.center,
+            bgcolor=ft.Colors.WHITE,
+            width=140,
+            height=90,
+            border_radius=15,
+        )
+
         # Contenedor 7
         self.cabecera = ft.Row(
             alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
@@ -191,6 +217,12 @@ class DashboarPrincial(ft.Container):
                             spacing=0,
                             controls=[
                                 ft.Container(self.tareas_pendientes)
+                            ]
+                        ),
+                        ft.Column(
+                            spacing=0,
+                            controls=[
+                                ft.Container(self.habitos_pendientes)
                             ]
                         )
                     ]
