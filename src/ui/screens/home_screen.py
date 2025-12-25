@@ -17,7 +17,17 @@ class DashboarPrincial(ft.Container):
         )
 
         # Contenedor 3
-        self.dias_racha = ft.Text(value=f'🔥{0} Días Racha')
+        self.dias_racha = ft.Text(value=f' 🔥  {0} Días Racha ', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK)
+        self.racha = ft.Container(
+            content=self.dias_racha,
+            margin=0,
+            padding=2,
+            alignment=ft.alignment.center,
+            bgcolor=ft.Colors.WHITE,
+            # width=90,
+            height=36,
+            border_radius=15,
+        )
 
         # Contenedor 4
         self.fecha_actual = ft.Text(value='Mié,24 Dic')
@@ -123,7 +133,7 @@ class DashboarPrincial(ft.Container):
                         ft.Column(
                             spacing=0,
                             controls=[
-                                ft.Container(self.dias_racha)
+                                ft.Container(self.racha)
                             ]
                         ),
                         ft.Column(
