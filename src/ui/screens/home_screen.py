@@ -105,30 +105,7 @@ class DashboarPrincial(ft.Container):
         )
 
         # Contenedor 7
-        self.cabecera = ft.Row(
-            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-            controls=[
-                ft.Text("Progreso Semanal", weight=ft.FontWeight.BOLD, size=18, color=ft.Colors.BLACK),
-                ft.Container(
-                    content=ft.Text("Últimos 7 días", size=12, color=ft.Colors.BLACK54),
-                    bgcolor="#f0f0f0",
-                    padding=ft.padding.symmetric(horizontal=12, vertical=5),
-                    border_radius=15
-                )
-            ]
-        )
 
-        dias = ["L", "M", "X", "J", "V", "S", "D"]
-        self.pie = ft.Row(
-            alignment=ft.MainAxisAlignment.SPACE_AROUND,
-            controls=[
-                ft.Text(
-                    d, 
-                    color=ft.Colors.BLACK if d == "X" else ft.Colors.BLACK45,
-                    weight=ft.FontWeight.BOLD if d == "X" else ft.FontWeight.NORMAL
-                ) for d in dias
-            ]
-        )
 
         # Contenedor 8
         self.boton_habitos = ft.ElevatedButton(
@@ -223,26 +200,6 @@ class DashboarPrincial(ft.Container):
                 ft.Row(
                     spacing=20,
                     controls=[
-                        ft.Container(
-                            ft.Column(
-                            spacing=20,
-                            controls=[
-                                self.cabecera,
-                                ft.Container(expand=True),
-                                self.pie
-                            ]
-                        ),
-                            bgcolor = ft.Colors.WHITE,
-                            border_radius = 30,
-                            padding = 25,
-                            height = 250,
-                            shadow = ft.BoxShadow(blur_radius=15, color=ft.Colors.BLACK12)
-                        )
-                    ]
-                ),
-                ft.Row(
-                    spacing=20,
-                    controls=[
                         ft.Column(
                             spacing=20,
                             controls=[
@@ -254,6 +211,4 @@ class DashboarPrincial(ft.Container):
                 ),
                 self.navegador_bar
             ])
-        )
-
-                                
+        )                        
