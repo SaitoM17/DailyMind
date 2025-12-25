@@ -51,8 +51,30 @@ class DashboarPrincial(ft.Container):
         )
 
         # Contenedor 5 
-        self.numero_tareas_pendientes = ft.Text(value='0')
-        self.texto_tareas_pendientes = ft.Text(value='Tareas Pendientes')
+        self.icono_tareas = ft.Text(value='📝', size=18, weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK)
+        self.numero_tareas_pendientes = ft.Text('2', size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK)
+        self.texto_tareas_pendientes = ft.Text(value='Tareas Pendientes', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK)
+        
+        self.tareas_pendientes = ft.Container(
+            content=ft.Column(
+                alignment=ft.MainAxisAlignment.CENTER,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                controls=[
+                    ft.Row(
+                        alignment=ft.MainAxisAlignment.CENTER,
+                        vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                        controls=[self.icono_tareas,self.numero_tareas_pendientes]), 
+                    self.texto_tareas_pendientes
+                    ]
+                ),
+            margin=0,
+            padding=2,
+            alignment=ft.alignment.center,
+            bgcolor=ft.Colors.WHITE,
+            width=140,
+            height=90,
+            border_radius=15,
+        )
 
         # Contenedor 7
         self.cabecera = ft.Row(
@@ -168,8 +190,7 @@ class DashboarPrincial(ft.Container):
                         ft.Column(
                             spacing=0,
                             controls=[
-                                ft.Container(self.numero_tareas_pendientes),
-                                ft.Container(self.texto_tareas_pendientes)
+                                ft.Container(self.tareas_pendientes)
                             ]
                         )
                     ]
