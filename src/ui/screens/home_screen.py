@@ -125,6 +125,23 @@ class DashboarPrincial(ft.Container):
 
         # Contenedor 8
         self.proximos_habitos = ft.Text(value='Próximos Hábitos', size=25, weight=ft.FontWeight.BOLD)
+        self.habitos_contenedor = ft.Container(
+            content=ft.Column(
+                [
+                    ft.Container(ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
+                    ft.Container(ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
+                    ft.Container(ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
+                    ft.Container(ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
+                    ft.Container(ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
+                ]
+            ),
+            margin=0,
+            padding=2,
+            alignment=ft.alignment.center,
+            border_radius=10,
+            col={"xs": 12, "md": 6, "lg": 4}
+        )
+
         # Contenedor 9
         self.boton_habitos = ft.ElevatedButton(
             content=ft.Row(
@@ -226,6 +243,13 @@ class DashboarPrincial(ft.Container):
                     run_spacing=20
                 ),
                 self.proximos_habitos,
+                ft.ResponsiveRow(
+                    controls=[
+                        self.tareas_contenedor
+                    ],
+                    spacing=20,
+                    run_spacing=20
+                ),
                 ft.Row(
                     spacing=20,
                     controls=[
