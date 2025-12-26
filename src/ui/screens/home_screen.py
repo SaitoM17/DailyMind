@@ -6,8 +6,7 @@ class DashboarPrincial(ft.Container):
     
     def __init__(self):
         super().__init__()
-        
-        # self.page.adaptive = True
+        self.expand = True
 
         #Contenidor 1
         self.texto_bienvenida = ft.Text(value='Hola, Said')
