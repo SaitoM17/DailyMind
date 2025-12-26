@@ -18,6 +18,30 @@ class DashboarPrincial(ft.Container):
             icon_size=30,
         )
 
+        self.encabezado_bienvenida = ft.Container(
+            content=ft.Column(
+                controls=[
+                    self.texto_bienvenida
+                ]
+            ),
+            alignment=ft.Alignment(-0.9,0.0),
+            padding=2,
+            margin=0,
+            col={"xs": 6, "md": 6, "lg": 4}
+        )
+
+        self.encabezado_configuracion = ft.Container(
+            content=ft.Column(
+                controls=[
+                    self.boton_configuracion
+                ]
+            ),
+            alignment=ft.Alignment(0.8,0.0),
+            padding=2,
+            margin=0,
+            col={"xs": 6, "md": 6, "lg": 4}
+        )
+
         # Contenedor 3
         self.dias_racha = ft.Text(value=f' 🔥  {0} Días Racha ', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK)
         self.racha = ft.Container(
@@ -192,21 +216,12 @@ class DashboarPrincial(ft.Container):
 
         self.content = ft.SafeArea(
             ft.Column([
-                ft.Row(
+                ft.ResponsiveRow(
                     spacing=20,
+                    run_spacing=20,
                     controls=[
-                        ft.Column(
-                            spacing=20,
-                            controls=[
-                                ft.Container(self.texto_bienvenida)
-                            ]
-                        ),
-                        ft.Column(
-                            spacing=20,
-                            controls=[
-                                ft.Container(self.boton_configuracion, padding=0)
-                            ]
-                        )
+                        self.encabezado_bienvenida,
+                        self.encabezado_configuracion
                     ]
                 ),
                 ft.Row(
