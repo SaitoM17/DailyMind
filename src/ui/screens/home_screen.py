@@ -9,7 +9,7 @@ class DashboarPrincial(ft.Container):
         self.expand = True
 
         #Contenidor 1
-        self.texto_bienvenida = ft.Text(value='Hola, Said')
+        self.texto_bienvenida = ft.Text(value=f'Hola, Said 👋\n¡A darle duro hoy!')
        
         self.circulo_avatar = ft.CircleAvatar(
             foreground_image_src='https://raw.githubusercontent.com/SaitoM17/DailyMind/main/src/assets/icons/imagen_perfil_prueba.png',
@@ -26,7 +26,7 @@ class DashboarPrincial(ft.Container):
 
         self.encabezado_bienvenida = ft.Container(
             content=ft.Row(
-                spacing=20,
+                spacing=10,
                 controls=[
                     ft.Container(self.circulo_avatar),
                     ft.Container(self.texto_bienvenida)
