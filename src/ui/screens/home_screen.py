@@ -141,11 +141,10 @@ class DashboarPrincial(ft.Container):
         self.tareas_contenedor = ft.Container(
             content=ft.Column(
                 [
-                    ft.Container(ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
-                    ft.Container(ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
-                    ft.Container(ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
-                    ft.Container(ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
-                    ft.Container(ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
+                    ft.Container(ft.Checkbox(label=ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK)), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
+                    ft.Container(ft.Checkbox(label=ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK)), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
+                    ft.Container(ft.Checkbox(label=ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK)), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
+                    ft.Container(ft.Checkbox(label=ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK)), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
                 ]
             ),
             margin=0,
@@ -160,11 +159,10 @@ class DashboarPrincial(ft.Container):
         self.habitos_contenedor = ft.Container(
             content=ft.Column(
                 [
-                    ft.Container(ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
-                    ft.Container(ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
-                    ft.Container(ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
-                    ft.Container(ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
-                    ft.Container(ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
+                    ft.Container(ft.Checkbox(label=ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK)), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
+                    ft.Container(ft.Checkbox(label=ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK)), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
+                    ft.Container(ft.Checkbox(label=ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK)), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
+                    ft.Container(ft.Checkbox(label=ft.Text(value='Texto de prueba de contenedor', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK)), padding=2, alignment=ft.alignment.center, bgcolor=ft.Colors.WHITE, border_radius=10),
                 ]
             ),
             margin=0,
