@@ -10,6 +10,13 @@ class DashboarPrincial(ft.Container):
 
         #Contenidor 1
         self.texto_bienvenida = ft.Text(value='Hola, Said')
+       
+        self.circulo_avatar = ft.CircleAvatar(
+            foreground_image_src='https://raw.githubusercontent.com/SaitoM17/DailyMind/main/src/assets/icons/imagen_perfil_prueba.png',
+            content=ft.Text(value='ss'),
+            radius=20
+        )
+
         self.boton_configuracion = ft.IconButton(
             icon=ft.Icons.SETTINGS,
             icon_color=ft.Colors.BLACK,
@@ -18,9 +25,11 @@ class DashboarPrincial(ft.Container):
         )
 
         self.encabezado_bienvenida = ft.Container(
-            content=ft.Column(
+            content=ft.Row(
+                spacing=20,
                 controls=[
-                    self.texto_bienvenida
+                    ft.Container(self.circulo_avatar),
+                    ft.Container(self.texto_bienvenida)
                 ]
             ),
             alignment=ft.Alignment(-0.9,0.0),
