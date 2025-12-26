@@ -200,83 +200,80 @@ class DashboarPrincial(ft.Container):
             ),
         )
 
-        # Contenedor 11
-        self.navegador_bar = ft.NavigationBar(
-            destinations=[
-                    ft.NavigationBarDestination(icon=ft.Icons.HOME, label="Incio"),
-                    ft.NavigationBarDestination(icon=ft.Icons.TASK, label="Tareas"),
-                    ft.NavigationBarDestination(icon=ft.Icons.TRACK_CHANGES,label="Hábitos"),
-                    ft.NavigationBarDestination(icon=ft.Icons.ANALYTICS, label='Estadística')
-                ],
-            border=ft.Border(
-                top=ft.BorderSide(color=ft.CupertinoColors.SYSTEM_GREY2, width=0)
-            ),
+        self.botones_flotantes = ft.Column(
+            controls=[
+                self.boton_habitos,
+                self.boton_tareas
+            ],
+            alignment=ft.MainAxisAlignment.END,
+            horizontal_alignment=ft.CrossAxisAlignment.END,
+            spacing=10
         )
 
-
         self.content = ft.SafeArea(
-            ft.Column([
-                ft.ResponsiveRow(
-                    spacing=20,
-                    run_spacing=20,
-                    controls=[
-                        self.encabezado_bienvenida,
-                        self.encabezado_configuracion
-                    ]
-                ),
-                ft.Row(
-                    spacing=20,
-                    controls=[
-                        ft.Column(
-                            spacing=0,
-                            controls=[
-                                ft.Container(self.racha)
-                            ]
-                        ),
-                        ft.Column(
-                            spacing=20,
-                            controls=[
-                                ft.Container(self.fecha)
-                            ]
-                        )
-                    ]
-                ),
-                ft.ResponsiveRow(
-                    controls=[
-                        self.tareas_pendientes,
-                        self.habitos_pendientes
-                    ],
-                    spacing=20,
-                    run_spacing=20
-                ),
-                self.proximas_tareas,
-                ft.ResponsiveRow(
-                    controls=[
-                        self.tareas_contenedor
-                    ],
-                    spacing=20,
-                    run_spacing=20
-                ),
-                self.proximos_habitos,
-                ft.ResponsiveRow(
-                    controls=[
-                        self.tareas_contenedor
-                    ],
-                    spacing=20,
-                    run_spacing=20
-                ),
-                ft.Row(
-                    spacing=20,
-                    controls=[
-                        ft.Column(
-                            spacing=20,
-                            controls=[
-                                ft.Container(self.boton_habitos),
-                                ft.Container(self.boton_tareas)
-                            ]
-                        )
-                    ]
-                ),
-                self.navegador_bar
-            ])
-        )                        
+            content=ft.Stack(
+                controls=[
+                    ft.Column(
+                        scroll=ft.ScrollMode.ADAPTIVE,
+                        expand=True,
+                        controls=[
+                            ft.ResponsiveRow(
+                                spacing=20,
+                                run_spacing=20,
+                                controls=[
+                                self.encabezado_bienvenida,
+                                self.encabezado_configuracion
+                                ]
+                            ),
+                            ft.Row(
+                                spacing=20,
+                                controls=[
+                                    ft.Column(
+                                        spacing=0,
+                                        controls=[
+                                            ft.Container(self.racha)
+                                        ]
+                                    ),
+                                    ft.Column(
+                                        spacing=20,
+                                        controls=[
+                                            ft.Container(self.fecha)
+                                        ]
+                                    )
+                                ]
+                            ),
+                            ft.ResponsiveRow(
+                                controls=[
+                                    self.tareas_pendientes,
+                                    self.habitos_pendientes
+                                ],
+                                spacing=20,
+                                run_spacing=20
+                            ),
+                            self.proximas_tareas,
+                            ft.ResponsiveRow(
+                                controls=[
+                                    self.tareas_contenedor
+                                ],
+                                spacing=20,
+                                run_spacing=20
+                            ),
+                            self.proximos_habitos,
+                            ft.ResponsiveRow(
+                                controls=[
+                                    self.tareas_contenedor
+                                ],
+                                spacing=20,
+                                run_spacing=20
+                            ),
+                        ]
+                    ),
+                    ft.Container(
+                        content=self.botones_flotantes,
+                        bottom=20,
+                        right=20
+                    )
+                ],
+                expand=True
+            )
+        )                 
