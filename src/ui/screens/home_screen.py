@@ -2,7 +2,7 @@ import flet as ft
 import locale
 from datetime import datetime
 
-class DashboarPrincial(ft.Container):
+class DashboardPrincial(ft.Container):
     
     def __init__(self):
         super().__init__()

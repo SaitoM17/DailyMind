@@ -1,12 +1,12 @@
 import flet as ft
-from ui.screens.home_screen import DashboarPrincial
+from ui.screens.home_screen import DashboardPrincial
 from ui.components.nav_bar import BarraNavegacion
 
 def main(page: ft.Page):
     # page.scroll = True
 
     nav = BarraNavegacion(page)
-    app = DashboarPrincial()
+    app = DashboardPrincial()
 
     page.navigation_bar = nav
     page.add(app)
