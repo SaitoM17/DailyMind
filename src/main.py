@@ -19,9 +19,12 @@ def main(page: ft.Page):
             page.views.append(
                 ft.View(
                     route="/",
-                    controls=[DashboardPrincial(page)],
+                    controls=[
+                        ft.AppBar(title=ft.Text("Prueba Home"), bgcolor=ft.Colors.RED),
+                        DashboardPrincial(page)
+                        ],
                     # LA BARRA VA AQUÍ DENTRO DEL VIEW
-                    navigation_bar=BarraNavegacion(page) 
+                    # navigation_bar=BarraNavegacion(page) 
                 )
             )
         
