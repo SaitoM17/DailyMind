@@ -3,6 +3,7 @@ import flet as ft
 from ui.screens.home_screen import DashboardPrincial
 from ui.components.nav_bar import BarraNavegacion
 from ui.screens.task_screen import TareasScreen
+from ui.components.app_bar import BarraNavegacionSuperior
 
 if sys.stdout.encoding != 'utf-8':
     sys.stdout.reconfigure(encoding='utf-8')
@@ -20,17 +21,26 @@ def main(page: ft.Page):
                 ft.View(
                     route="/",
                     controls=[
-                        ft.AppBar(title=ft.Text("Prueba Home"), bgcolor=ft.Colors.RED),
+                        BarraNavegacionSuperior(),
                         DashboardPrincial(page)
-                        ],
-                    # LA BARRA VA AQUÍ DENTRO DEL VIEW
-                    # navigation_bar=BarraNavegacion(page) 
+                        ],                    
+                    navigation_bar=BarraNavegacion(page)
                 )
             )
         
         # Vista de Tareas
         elif page.route == "/Tareas":
-            page.views.append(TareasScreen(page)) # Esta clase ya debería tener su propia BarraNavegacion
+            page.views.append(
+                ft.View(
+                    "/store",
+                    [
+                        BarraNavegacionSuperior(),
+                        TareasScreen(page),
+                    ],
+                    BarraNavegacion(page)
+                )
+            )
+        # page.update()
             
         page.update()
 
