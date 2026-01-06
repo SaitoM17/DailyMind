@@ -11,11 +11,8 @@ class BarraNavegacion(ft.NavigationBar):
             ft.NavigationBarDestination(icon=ft.Icons.TRACK_CHANGES,label="Hábitos"),
             ft.NavigationBarDestination(icon=ft.Icons.ANALYTICS, label='Estadística')
         ]
-        self.selected_index = 0 if page.route == "/" else 1
         self.on_change = self.cambiar_ruta
 
     def cambiar_ruta(self, e):
-        if e.control.selected_index == 0:
-            self.page.go("/")
-        elif e.control.selected_index == 1:
-            self.page.go("/Tareas")
+        rutas = ["/", "/Tareas", "/Habitos", "/Estadistica"]
+        self.page.go(rutas[e.control.selected_index])
