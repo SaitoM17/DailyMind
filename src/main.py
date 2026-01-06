@@ -4,6 +4,8 @@ from ui.screens.home_screen import DashboardPrincial
 from ui.components.nav_bar import BarraNavegacion
 from ui.screens.task_screen import TareasScreen
 from ui.components.app_bar import BarraNavegacionSuperior
+from ui.screens.habit_screen import HabitosScreen
+from ui.screens.progress_statistics_screen import EstadisticasProgresoScreen
 
 if sys.stdout.encoding != 'utf-8':
     sys.stdout.reconfigure(encoding='utf-8')
@@ -32,7 +34,7 @@ def main(page: ft.Page):
         elif page.route == "/Tareas":
             page.views.append(
                 ft.View(
-                    "/store",
+                    "/Tareas",
                     [
                         BarraNavegacionSuperior(),
                         TareasScreen(page),
@@ -40,7 +42,32 @@ def main(page: ft.Page):
                     BarraNavegacion(page)
                 )
             )
-        # page.update()
+        
+        # Vista de Hábitos
+        elif page.route == '/Habitos':
+            page.views.append(
+                ft.View(
+                    '/Hábitos',
+                    [
+                        BarraNavegacionSuperior(),
+                        HabitosScreen(page),
+                    ],
+                    BarraNavegacion(page)
+                )
+            )
+        
+        # Vista de Estadistica y progreso
+        elif page.route == '/Estadistica':
+            page.views.append(
+                ft.View(
+                    '/Estadistica',
+                    [
+                        BarraNavegacionSuperior(),
+                        EstadisticasProgresoScreen(page),
+                    ],
+                    BarraNavegacion(page)
+                )
+            )
             
         page.update()
 
