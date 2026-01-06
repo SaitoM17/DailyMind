@@ -183,14 +183,6 @@ class DashboardPrincial(ft.Container):
                         scroll=ft.ScrollMode.ADAPTIVE,
                         expand=True,
                         controls=[
-                            ft.ResponsiveRow(
-                                spacing=20,
-                                run_spacing=20,
-                                controls=[
-                                self.encabezado_bienvenida,
-                                self.encabezado_configuracion
-                                ]
-                            ),
                             ft.Row(
                                 spacing=20,
                                 controls=[
