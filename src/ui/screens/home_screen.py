@@ -10,48 +10,6 @@ class DashboardPrincial(ft.Container):
         self.page = page
         self.expand = True
 
-        #Contenidor 1
-        self.texto_bienvenida = ft.Text(value=f'Hola, Said 👋\n¡A darle duro hoy!')
-       
-        self.circulo_avatar = ft.CircleAvatar(
-            foreground_image_src='https://raw.githubusercontent.com/SaitoM17/DailyMind/main/src/assets/icons/imagen_perfil_prueba.png',
-            content=ft.Text(value='ss'),
-            radius=20
-        )
-
-        self.boton_configuracion = ft.IconButton(
-            icon=ft.Icons.SETTINGS,
-            icon_color=ft.Colors.BLACK,
-            bgcolor="#ffffff",
-            icon_size=30,
-        )
-
-        self.encabezado_bienvenida = ft.Container(
-            content=ft.Row(
-                spacing=10,
-                controls=[
-                    ft.Container(self.circulo_avatar),
-                    ft.Container(self.texto_bienvenida)
-                ]
-            ),
-            alignment=ft.Alignment(-0.9,0.0),
-            padding=2,
-            margin=0,
-            col={"xs": 6, "md": 6, "lg": 4}
-        )
-
-        self.encabezado_configuracion = ft.Container(
-            content=ft.Column(
-                controls=[
-                    self.boton_configuracion
-                ]
-            ),
-            alignment=ft.Alignment(0.8,0.0),
-            padding=2,
-            margin=0,
-            col={"xs": 6, "md": 6, "lg": 4}
-        )
-
         # Contenedor 3
         self.dias_racha = ft.Text(value=f' 🔥  {0} Días Racha ', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK)
         self.racha = ft.Container(
