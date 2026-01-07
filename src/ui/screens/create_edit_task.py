@@ -3,6 +3,13 @@ import locale
 from datetime import datetime
 
 def CrearEditarEliminarTareaScreen(page: ft.Page):
+
+    try:
+        locale.setlocale(locale.LC_TIME, 'es_ES.utf8') 
+    except:
+        locale.setlocale(locale.LC_TIME, 'spanish')
+
+    estado = {"prioridad": "Media"}
     
     appbar = ft.AppBar(
         leading=ft.IconButton(
@@ -33,11 +40,6 @@ def CrearEditarEliminarTareaScreen(page: ft.Page):
     )
     page.overlay.append(date_picker)
 
-    try:
-        locale.setlocale(locale.LC_TIME, 'es_ES.utf8') 
-    except:
-        locale.setlocale(locale.LC_TIME, 'spanish')
-
     ahora = datetime.now()
     ahora_formateado = ahora.strftime("%a %d, %b")
 
@@ -60,6 +62,40 @@ def CrearEditarEliminarTareaScreen(page: ft.Page):
         padding=ft.padding.symmetric(vertical=5, horizontal=10),
         margin=10,
     )
+
+    # LÓGICA DE PRIORIDAD (DISEÑO SEGMENTADO)
+    prioridad_container = ft.Container() # Contenedor vacío para refrescar
+
+    def actualizar_prioridad(valor):
+        estado["prioridad"] = valor
+        prioridad_container.content = crear_selector_prioridad()
+        page.update()
+
+    def crear_selector_prioridad():
+        opciones = ["Baja", "Media", "Alta"]
+        botones = []
+        for op in opciones:
+            es_sel = op == estado["prioridad"]
+            botones.append(
+                ft.Container(
+                    content=ft.Text(op, color=ft.Colors.BLACK if es_sel else ft.Colors.GREY_700, weight="bold" if es_sel else "normal"),
+                    alignment=ft.alignment.center,
+                    expand=True,
+                    height=40,
+                    bgcolor=ft.Colors.WHITE if es_sel else None,
+                    border_radius=20,
+                    shadow=ft.BoxShadow(blur_radius=4, color=ft.Colors.BLACK12) if es_sel else None,
+                    on_click=lambda e, val=op: actualizar_prioridad(val)
+                )
+            )
+        return ft.Container(
+            content=ft.Row(botones, spacing=0),
+            bgcolor="#F2F2E7",
+            border_radius=25,
+            padding=5,
+        )
+
+    prioridad_container.content = crear_selector_prioridad()
     
     def guardar_tarea(e):
         print(f"Tarea guardada: {tarea_input.value}")
@@ -78,6 +114,7 @@ def CrearEditarEliminarTareaScreen(page: ft.Page):
                         opcional_descripcion_tarea,
                     ]),
                     descripcion_input,
+                    prioridad_container,
                     selector_tarjeta,
                     ft.ElevatedButton("Guardar Tarea", on_click=guardar_tarea)
                 ], spacing=20)
