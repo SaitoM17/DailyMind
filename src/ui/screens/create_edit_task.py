@@ -13,11 +13,11 @@ def CrearEditarEliminarTareaScreen(page: ft.Page):
             bgcolor=ft.Colors.with_opacity(0.04, ft.CupertinoColors.SYSTEM_BACKGROUND),
     )
 
-    # Campos de texto para la tarea
-    task_input = ft.TextField(label="¿Qué hay que hacer?", autofocus=True)
+    nombre_tarea = ft.Text(value='Nombre de la Tarea')
+    tarea_input = ft.TextField(label='Ej. Comprar leche', autofocus=True)
     
     def guardar_tarea(e):
-        print(f"Tarea guardada: {task_input.value}")
+        print(f"Tarea guardada: {tarea_input.value}")
         page.go("/") # Regresa al inicio tras guardar
 
     return ft.View(
@@ -25,9 +25,9 @@ def CrearEditarEliminarTareaScreen(page: ft.Page):
         controls=[
             appbar,
             ft.SafeArea(
-                content=ft.Column([
-                    ft.Text("Detalles de la tarea", size=20, weight="bold"),
-                    task_input,
+                content=ft.Column([                    
+                    nombre_tarea,
+                    tarea_input,
                     ft.ElevatedButton("Guardar Tarea", on_click=guardar_tarea)
                 ], spacing=20)
             )
