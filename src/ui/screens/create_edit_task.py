@@ -15,6 +15,10 @@ def CrearEditarEliminarTareaScreen(page: ft.Page):
 
     nombre_tarea = ft.Text(value='Nombre de la Tarea')
     tarea_input = ft.TextField(label='Ej. Comprar leche', autofocus=True)
+
+    descripcion_tarea = ft.Text(value='Descripción')
+    opcional_descripcion_tarea = ft.Text(value='(Opcional)')
+    descripcion_input = ft.TextField(label='Añadir detalles...')
     
     def guardar_tarea(e):
         print(f"Tarea guardada: {tarea_input.value}")
@@ -28,6 +32,11 @@ def CrearEditarEliminarTareaScreen(page: ft.Page):
                 content=ft.Column([                    
                     nombre_tarea,
                     tarea_input,
+                    ft.Row([
+                        descripcion_tarea,
+                        opcional_descripcion_tarea,
+                    ]),
+                    descripcion_input,
                     ft.ElevatedButton("Guardar Tarea", on_click=guardar_tarea)
                 ], spacing=20)
             )
