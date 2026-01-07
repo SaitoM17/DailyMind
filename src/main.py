@@ -6,6 +6,8 @@ from ui.screens.task_screen import TareasScreen
 from ui.components.app_bar import BarraNavegacionSuperior
 from ui.screens.habit_screen import HabitosScreen
 from ui.screens.progress_statistics_screen import EstadisticasProgresoScreen
+from ui.screens.create_edit_task import CrearEditarEliminarTareaScreen
+from ui.screens.create_edit_habit import CrearEditarEliminarHabitoScreen
 
 if sys.stdout.encoding != 'utf-8':
     sys.stdout.reconfigure(encoding='utf-8')
@@ -24,9 +26,9 @@ def main(page: ft.Page):
                     route="/",
                     controls=[
                         BarraNavegacionSuperior(),
-                        DashboardPrincial(page)
-                        ],                    
-                    navigation_bar=BarraNavegacion(page)
+                        DashboardPrincial(page),                    
+                        ],
+                        navigation_bar=BarraNavegacion(page),         
                 )
             )
         
@@ -68,6 +70,12 @@ def main(page: ft.Page):
                     BarraNavegacion(page)
                 )
             )
+        
+        elif page.route == "/create":
+            page.views.append(CrearEditarEliminarTareaScreen(page))
+
+        elif page.route == "/CreateHabito":
+            page.views.append(CrearEditarEliminarHabitoScreen(page))
             
         page.update()
 
