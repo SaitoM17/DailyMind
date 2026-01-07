@@ -1,6 +1,8 @@
 import flet as ft
 import locale
 from datetime import datetime
+from ui.components.button_task import ButtonCrearTarea
+from ui.components.button_habit import ButtonCrearHabito
 
 class DashboardPrincial(ft.Container):
     
@@ -133,43 +135,10 @@ class DashboardPrincial(ft.Container):
         )
 
         # Contenedor 9
-        self.boton_habitos = ft.ElevatedButton(
-            content=ft.Row(
-                [
-                    ft.Text(value="Hábito", size=16),
-                    ft.Icon(name=ft.Icons.SWAP_HORIZ),
-                ],
-                tight=True,
-                spacing=10,
-            ),
-            style=ft.ButtonStyle(
-                color=ft.Colors.BLACK,
-                bgcolor="#ffffff",
-                shape=ft.RoundedRectangleBorder(radius=15),
-            ),
-        )
-
-        # Contenedor 10
-        self.boton_tareas = ft.ElevatedButton(
-            content=ft.Row(
-                [
-                    ft.Text(value='Nueva Tarea', size=18),
-                    ft.Icon(name=ft.Icons.ADD)
-                ],
-                tight=True,
-                spacing=10
-            ),
-            style=ft.ButtonStyle(
-                color=ft.Colors.BLACK,
-                bgcolor="#ffffff",
-                shape=ft.RoundedRectangleBorder(radius=15),
-            ),
-        )
-
         self.botones_flotantes = ft.Column(
             controls=[
-                self.boton_habitos,
-                self.boton_tareas
+                ButtonCrearHabito(page),
+                ButtonCrearTarea(page)
             ],
             alignment=ft.MainAxisAlignment.END,
             horizontal_alignment=ft.CrossAxisAlignment.END,
