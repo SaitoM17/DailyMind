@@ -98,7 +98,9 @@ def CrearEditarEliminarTareaScreen(page: ft.Page):
     prioridad_container.content = crear_selector_prioridad()
     
     def guardar_tarea(e):
+        prioridad_final = estado["prioridad"]
         print(f"Tarea guardada: {tarea_input.value}")
+        print(f"Guardando tarea con prioridad: {prioridad_final}")
         page.go("/") # Regresa al inicio tras guardar
 
     return ft.View(
