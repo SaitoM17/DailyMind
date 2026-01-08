@@ -1,34 +1,62 @@
 import flet as ft
 
-def CrearEditarEliminarHabitoScreen(page: ft.Page):
+class CrearEditarEliminarHabitoScreen(ft.Container):
+    def __init__(self, page: ft.Page):
+        super().__init__()
+        self.page = page
+        self.expand = True # Para que ocupe todo el espacio en el View
 
-    appbar = ft.AppBar(
-        leading=ft.IconButton(
-            ft.Icons.CLEAR,
-            icon_size=25, 
-            on_click=lambda _:page.go('/')
-            ),
-            title=ft.Text('Crear Hábito'),
-            center_title=True,
-            bgcolor=ft.Colors.with_opacity(0.04, ft.CupertinoColors.SYSTEM_BACKGROUND),
-    )
+        # Componentes de la interfaz
+        self.task_input = ft.TextField(
+            label='¿Qué hay que hacer?', 
+            autofocus=True,
+            border_color='blue'
+        )
 
-    task_input = ft.TextField(label="¿Qué hay que hacer?", autofocus=True)
-    
-    def guardar_tarea(e):
-        print(f"Hábito guardada: {task_input.value}")
-        page.go("/") # Regresa al inicio tras guardar
+        self.appbar = ft.Row(
+            controls=[
+                ft.IconButton(
+                        icon=ft.Icons.CLEAR,
+                        on_click=lambda _: self.page.go('/')
+                    ),
+                ft.Container(
+                    content=ft.Text(
+                        'Crear Hábito', 
+                        size=20, 
+                        weight='bold',
+                        text_align=ft.TextAlign.CENTER # Centra el texto dentro del container
+                    ),
+                    expand=True, # Ocupa todo el espacio sobrante
+                    margin=ft.margin.only(right=40) # Compensa el ancho del icono izquierdo para un centrado perfecto
+                ),
+            ],
+            alignment=ft.MainAxisAlignment.START,
+            vertical_alignment=ft.CrossAxisAlignment.CENTER
+        )
 
-    return ft.View(
-        "/create",
-        controls=[
-            appbar,
-            ft.SafeArea(
-                content=ft.Column([
-                    ft.Text("Detalles del Hábito", size=20, weight="bold"),
-                    task_input,
-                    ft.ElevatedButton("Guardar Hábito", on_click=guardar_tarea)
-                ], spacing=20)
+        # Definimos el contenido siguiendo tu estructura
+        self.content = ft.SafeArea(
+            content=ft.Stack(
+                controls=[
+                    ft.Column(
+                        scroll=ft.ScrollMode.ADAPTIVE,
+                        expand=True,
+                        spacing=20,
+                        controls=[
+                            self.appbar,
+                            # Cuerpo del formulario
+                            ft.Text('Detalles del Hábito', size=18),
+                            self.task_input,
+                            ft.ElevatedButton(
+                                text='Guardar Hábito',
+                                on_click=self.guardar_habito
+                            )
+                        ]
+                    )
+                ]
             )
-        ]
-    )
+        )
+
+    def guardar_habito(self, e):
+        print(f'Hábito guardado: {self.task_input.value}')
+        self.page.go('/')
