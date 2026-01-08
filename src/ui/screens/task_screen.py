@@ -17,20 +17,20 @@ class TareasScreen(ft.Container):
             spacing=10
         )
 
-        self.estado = {"prioridad": "Todas"}
+        self.estado = {'prioridad': 'Todas'}
 
         self.prioridad_container = ft.Container() # Contenedor vacío para refrescar
 
         def actualizar_prioridad(valor):
-            self.estado["prioridad"] = valor
+            self.estado['prioridad'] = valor
             self.prioridad_container.content = crear_selector_prioridad()
             page.update()
 
         def crear_selector_prioridad():
-            self.opciones = ["Baja", "Media", "Alta"]
+            self.opciones = ['Todas', 'Pendientes', 'Completadas']
             self.botones = []
             for op in self.opciones:
-                es_sel = op == self.estado["prioridad"]
+                es_sel = op == self.estado['prioridad']
                 self.botones.append(
                     ft.Container(
                         content=ft.Text(op, color=ft.Colors.BLACK if es_sel else ft.Colors.GREY_700, weight="bold" if es_sel else "normal"),
