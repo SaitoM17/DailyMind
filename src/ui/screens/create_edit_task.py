@@ -141,6 +141,8 @@ def CrearEditarEliminarTareaScreen(page: ft.Page):
             adaptive=True
     )
 
+    # Categorias
+    texto_categorias = ft.Text(value='Categoría')
     
     def guardar_tarea(e):
         prioridad_final = estado["prioridad"]
@@ -164,6 +166,7 @@ def CrearEditarEliminarTareaScreen(page: ft.Page):
                     descripcion_input,
                     prioridad_container,
                     selector_tarjeta,
+                    texto_categorias,
                     ft.Container(expand=True),
                     botones_contenedor
                 ],
