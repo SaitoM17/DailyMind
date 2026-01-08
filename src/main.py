@@ -48,7 +48,7 @@ def main(page: ft.Page):
         elif page.route == '/Habitos':
             page.views.append(
                 ft.View(
-                    '/Hábitos',
+                    '/Habitos',
                     [
                         BarraNavegacionSuperior(),
                         HabitosScreen(page),
