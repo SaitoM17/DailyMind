@@ -6,13 +6,6 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
         self.page = page
         self.expand = True # Para que ocupe todo el espacio en el View
 
-        # Componentes de la interfaz
-        self.task_input = ft.TextField(
-            label='¿Qué hay que hacer?', 
-            autofocus=True,
-            border_color='blue'
-        )
-
         self.appbar = ft.Row(
             controls=[
                 ft.IconButton(
@@ -34,6 +27,13 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
             vertical_alignment=ft.CrossAxisAlignment.CENTER
         )
 
+        self.habito_texto = ft.Text(value='Nombre del hábito')
+        self.habito_input = ft.TextField(
+            label='Ej. Leer 10 páginas', 
+            autofocus=True,
+            border_color='blue'
+        )
+
         # Definimos el contenido siguiendo tu estructura
         self.content = ft.SafeArea(
             content=ft.Stack(
@@ -45,8 +45,8 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
                         controls=[
                             self.appbar,
                             # Cuerpo del formulario
-                            ft.Text('Detalles del Hábito', size=18),
-                            self.task_input,
+                            self.habito_texto,
+                            self.habito_input,
                             ft.ElevatedButton(
                                 text='Guardar Hábito',
                                 on_click=self.guardar_habito
