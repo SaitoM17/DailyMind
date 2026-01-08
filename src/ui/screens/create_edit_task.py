@@ -96,6 +96,51 @@ def CrearEditarEliminarTareaScreen(page: ft.Page):
         )
 
     prioridad_container.content = crear_selector_prioridad()
+
+    # Boton de cancelar tarea
+    cancelar = ft.ElevatedButton(
+        content=ft.Row(
+            [
+                ft.Text(value='Cancelar', size=20),
+            ],
+            tight=True,
+            spacing=10
+        ),
+        expand=1,
+        style=ft.ButtonStyle(
+                shape=ft.RoundedRectangleBorder(radius=15),
+            )
+    )
+
+    # Boton de guardar tarea
+    guardar = ft.ElevatedButton(
+        content=ft.Row(
+            [
+                ft.Text('Guardar Tarea',size=20),
+            ],
+            tight=True,
+            spacing=10
+        ),
+        expand=1,
+        style=ft.ButtonStyle(
+                shape=ft.RoundedRectangleBorder(radius=15),
+            )
+    )
+
+    # Contenedor Botones
+    botones_contenedor = ft.Container(
+        ft.Row(
+            [
+                cancelar,
+                guardar
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+            vertical_alignment=ft.CrossAxisAlignment.CENTER,
+            ),
+            alignment=ft.alignment.center,
+            adaptive=True
+    )
+
     
     def guardar_tarea(e):
         prioridad_final = estado["prioridad"]
@@ -108,6 +153,7 @@ def CrearEditarEliminarTareaScreen(page: ft.Page):
         controls=[
             appbar,
             ft.SafeArea(
+                expand=True,
                 content=ft.Column([                    
                     nombre_tarea,
                     tarea_input,
@@ -118,8 +164,12 @@ def CrearEditarEliminarTareaScreen(page: ft.Page):
                     descripcion_input,
                     prioridad_container,
                     selector_tarjeta,
-                    ft.ElevatedButton("Guardar Tarea", on_click=guardar_tarea)
-                ], spacing=20)
+                    ft.Container(expand=True),
+                    botones_contenedor
+                ],
+                spacing=20,
+                expand=True
+                )
             )
         ]
     )
