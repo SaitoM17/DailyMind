@@ -74,7 +74,14 @@ def main(page: ft.Page):
             page.views.append(CrearEditarEliminarTareaScreen(page))
 
         elif page.route == "/CreateHabito":
-            page.views.append(CrearEditarEliminarHabitoScreen(page))
+            page.views.append(
+                ft.View(
+                    '/CreateHabito',
+                    [
+                        CrearEditarEliminarHabitoScreen(page)
+                    ]
+                )
+            )
             
         page.update()
 
