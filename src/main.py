@@ -20,20 +20,19 @@ def main(page: ft.Page):
         page.views.clear() # Limpiamos la pila
         
         # 1. Siempre ponemos el Inicio como base de la pila
-        if page.route == "/":
-            page.views.append(
-                ft.View(
-                    route="/",
-                    controls=[
-                        BarraNavegacionSuperior(),
-                        DashboardPrincial(page),                    
-                        ],
-                        navigation_bar=BarraNavegacion(page),         
-                )
+        page.views.append(
+            ft.View(
+                route="/",
+                controls=[
+                    BarraNavegacionSuperior(),
+                    DashboardPrincial(page),                    
+                    ],
+                    navigation_bar=BarraNavegacion(page),         
             )
+        )
         
         # Vista de Tareas
-        elif page.route == "/Tareas":
+        if page.route == "/Tareas":
             page.views.append(
                 ft.View(
                     "/Tareas",
