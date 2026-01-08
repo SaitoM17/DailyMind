@@ -5,6 +5,9 @@ class TareasScreen(ft.Container):
     def __init__(self, page: ft.Page):
         super().__init__()
 
+        self.cantidad_tareas_pendinetes = '4'
+        self.tareas_pendientes = ft.Text(value=f'Tienes {self.cantidad_tareas_pendinetes} tareas pendientes')
+
         self.boton_flotante = ft.Column(
             controls=[
                 ButtonCrearTarea(page)
@@ -22,7 +25,10 @@ class TareasScreen(ft.Container):
                         scroll=ft.ScrollMode.ADAPTIVE,
                         expand=True,
                         controls=[
-                            ft.Text('Texto de prueba de la nueva versión de la página de tareas')
+                            ft.Row(
+                                spacing=20,
+                                controls=[ft.Container(self.tareas_pendientes)]
+                            )
                         ]
                     ),
                     ft.Container(
