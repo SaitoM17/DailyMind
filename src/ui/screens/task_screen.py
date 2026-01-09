@@ -52,6 +52,51 @@ class TareasScreen(ft.Container):
         
         self.prioridad_container.content = crear_selector_prioridad()
 
+        self.selector_fecha = ft.Dropdown(
+            label='Fecha',
+            options=[
+                ft.Text('08, jue, ene')
+            ]
+        )
+
+        self.prioridad = ['Baja', 'Mediana', 'Alta']
+
+        def get_options():
+            self.opciones = []
+            for self.op in self.prioridad:
+                self.opciones.append(
+                    ft.DropdownOption(self.op)
+                )
+
+        self.selector_prioridad = ft.Dropdown(
+            label='Priodad',
+            options=[
+                ft.DropdownOption('Baja'),
+                ft.DropdownOption('Media'),
+                ft.DropdownOption('Alta')
+            ]
+        )
+
+        self.selector_categoria = ft.Dropdown(
+            label='Categoría',
+            options=[
+                ft.DropdownOption('Trabajo'),
+                ft.DropdownOption('Escuela'),
+                ft.DropdownOption('Hogar')
+            ]
+        )
+        # self.racha = ft.Container(
+        #     content=self.dias_racha,
+        #     margin=0,
+        #     padding=2,
+        #     # alignment=ft.alignment.center,
+        #     # bgcolor=ft.Colors.WHITE,
+        #     # width=90,
+        #     height=36,
+        #     border_radius=15,
+        # )
+
+
 
         self.content = ft.SafeArea(
             content=ft.Stack(
@@ -64,7 +109,10 @@ class TareasScreen(ft.Container):
                                 spacing=20,
                                 controls=[ft.Container(self.tareas_pendientes)]
                             ),
-                            self.prioridad_container
+                            self.prioridad_container,
+                            self.selector_fecha,
+                            self.selector_prioridad,
+                            self.selector_categoria
                         ]
                     ),
                     ft.Container(
