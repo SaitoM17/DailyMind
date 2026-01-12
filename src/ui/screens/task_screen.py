@@ -53,9 +53,11 @@ class TareasScreen(ft.Container):
         self.prioridad_container.content = crear_selector_prioridad()
 
         self.selector_fecha = ft.Dropdown(
-            label='Fecha',
+            label=ft.Text('Fecha', size=10),
+            border_width=0,
+            border_radius=15,
             options=[
-                ft.Text('08, jue, ene')
+                ft.DropdownOption('08, jue, ene')
             ]
         )
 
@@ -69,7 +71,9 @@ class TareasScreen(ft.Container):
                 )
 
         self.selector_prioridad = ft.Dropdown(
-            label='Priodad',
+            label=ft.Text('Priodad', size=10),
+            border_width=0,
+            border_radius=15,
             options=[
                 ft.DropdownOption('Baja'),
                 ft.DropdownOption('Media'),
@@ -78,7 +82,9 @@ class TareasScreen(ft.Container):
         )
 
         self.selector_categoria = ft.Dropdown(
-            label='Categoría',
+            label=ft.Text('Categoría', size=10),
+            border_width=0,
+            border_radius=15,
             options=[
                 ft.DropdownOption('Trabajo'),
                 ft.DropdownOption('Escuela'),
@@ -88,34 +94,32 @@ class TareasScreen(ft.Container):
         
         self.contenedor_fecha = ft.Container(
             content=self.selector_fecha,
-            margin=0,
-            padding=2,
-            alignment=ft.alignment.center,
-            bgcolor=ft.Colors.WHITE,
-            height=36,
-            border_radius=15
+            col=4,
+            alignment=ft.alignment.center
         )
 
         self.contenedor_prioridad = ft.Container(
             content=self.selector_prioridad,
-            margin=0,
-            padding=2,
-            alignment=ft.alignment.center,
-            bgcolor=ft.Colors.WHITE,
-            height=36,
-            border_radius=15
+            col=4,
+            alignment=ft.alignment.center
         )
 
         self.contenedor_categoria = ft.Container(
             content=self.selector_categoria,
-            margin=0,
-            padding=2,
-            alignment=ft.alignment.center,
-            bgcolor=ft.Colors.WHITE,
-            height=36,
-            border_radius=15
+            col=4,
+            alignment=ft.alignment.center
         )
 
+        self.fila_desplegables = ft.ResponsiveRow(
+            controls=[
+                self.contenedor_fecha,
+                self.contenedor_prioridad,
+                self.contenedor_categoria
+            ],
+            spacing=2,       # Espacio pequeño entre botones para que no se amontonen
+            run_spacing=0,   # Evitamos que salten de línea
+            alignment=ft.MainAxisAlignment.CENTER
+        )
 
         self.content = ft.SafeArea(
             content=ft.Stack(
@@ -129,25 +133,10 @@ class TareasScreen(ft.Container):
                                 controls=[ft.Container(self.tareas_pendientes)]
                             ),
                             self.prioridad_container,
-                            ft.Row(
-                                spacing=20,
-                                alignment=ft.MainAxisAlignment.CENTER,
-                                vertical_alignment=ft.CrossAxisAlignment.CENTER,
-                                controls=[
-                                    ft.Column(
-                                        spacing=20,
-                                        controls=[self.contenedor_fecha]
-                                    ),
-                                    ft.Column(
-                                        spacing=20,
-                                        controls=[self.contenedor_prioridad]
-                                    ),
-                                    ft.Column(
-                                        spacing=20,
-                                        controls=[self.contenedor_categoria]
-                                    )
-                                ]
-                            )
+                            ft.Container(
+                                padding=ft.padding.symmetric(horizontal=5),
+                                content=self.fila_desplegables
+                            )                            
                         ]
                     ),
                     ft.Container(
