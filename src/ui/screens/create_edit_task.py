@@ -14,15 +14,25 @@ class CrearEditarEliminarTareaScreen(ft.Container):
 
         self.estado = {"prioridad": "Media"}
 
-        self.appbar = ft.AppBar(
-            leading=ft.IconButton(
-                ft.Icons.CLEAR,
-                icon_size=25, 
-                on_click=lambda _:page.go('/')
-            ),
-            title=ft.Text('Crear Tarea'),
-            center_title=True,
-            bgcolor=ft.Colors.with_opacity(0.04, ft.CupertinoColors.SYSTEM_BACKGROUND),
+        self.appbar = ft.Row(
+            controls=[
+                ft.IconButton(
+                        icon=ft.Icons.CLEAR,
+                        on_click=lambda _: self.page.go('/')
+                    ),
+                ft.Container(
+                    content=ft.Text(
+                        'Crear Tarea', 
+                        size=20, 
+                        weight='bold',
+                        text_align=ft.TextAlign.CENTER # Centra el texto dentro del container
+                    ),
+                    expand=True, # Ocupa todo el espacio sobrante
+                    margin=ft.margin.only(right=40) # Compensa el ancho del icono izquierdo para un centrado perfecto
+                ),
+            ],
+            alignment=ft.MainAxisAlignment.START,
+            vertical_alignment=ft.CrossAxisAlignment.CENTER
         )
 
         self.nombre_tarea = ft.Text(value='Nombre de la Tarea')
