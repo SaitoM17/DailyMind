@@ -2,177 +2,171 @@ import flet as ft
 import locale
 from datetime import datetime
 
-def CrearEditarEliminarTareaScreen(page: ft.Page):
+class CrearEditarEliminarTareaScreen(ft.Container):
+    def __init__(self, page: ft.Page):
+        super().__init__()
+        self.expand = True
 
-    try:
-        locale.setlocale(locale.LC_TIME, 'es_ES.utf8') 
-    except:
-        locale.setlocale(locale.LC_TIME, 'spanish')
+        try:
+            locale.setlocale(locale.LC_TIME, 'es_ES.utf8') 
+        except:
+            locale.setlocale(locale.LC_TIME, 'spanish')
 
-    estado = {"prioridad": "Media"}
-    
-    appbar = ft.AppBar(
-        leading=ft.IconButton(
-            ft.Icons.CLEAR,
-            icon_size=25, 
-            on_click=lambda _:page.go('/')
+        self.estado = {"prioridad": "Media"}
+
+        self.appbar = ft.AppBar(
+            leading=ft.IconButton(
+                ft.Icons.CLEAR,
+                icon_size=25, 
+                on_click=lambda _:page.go('/')
             ),
             title=ft.Text('Crear Tarea'),
             center_title=True,
             bgcolor=ft.Colors.with_opacity(0.04, ft.CupertinoColors.SYSTEM_BACKGROUND),
-    )
-
-    nombre_tarea = ft.Text(value='Nombre de la Tarea')
-    tarea_input = ft.TextField(label='Ej. Comprar leche', autofocus=True)
-
-    descripcion_tarea = ft.Text(value='Descripción')
-    opcional_descripcion_tarea = ft.Text(value='(Opcional)')
-    descripcion_input = ft.TextField(label='Añadir detalles...')
-
-    def al_cambiar_fecha(e):
-        if date_picker.value:
-            fecha_seleccionada = date_picker.value.strftime("%a %d, %b")
-            texto_fecha.value = fecha_seleccionada
-            page.update()
-
-    date_picker = ft.DatePicker(
-        on_change=al_cambiar_fecha,
-    )
-    page.overlay.append(date_picker)
-
-    ahora = datetime.now()
-    ahora_formateado = ahora.strftime("%a %d, %b")
-
-    texto_fecha = ft.Text(ahora_formateado, color=ft.Colors.GREY_700)
-    
-    selector_tarjeta = ft.Container(
-        content=ft.ListTile(
-            leading=ft.Container(
-                content=ft.Icon(ft.Icons.CALENDAR_MONTH_OUTLINED, color=ft.Colors.BLACK),
-                bgcolor=ft.Colors.YELLOW_100,
-                padding=10,
-                border_radius=25,
-            ),
-            title=ft.Text("Fecha de vencimiento", weight=ft.FontWeight.BOLD),
-            subtitle=texto_fecha,
-            trailing=ft.Icon(ft.Icons.CHEVRON_RIGHT),
-            on_click=lambda _: setattr(date_picker, "open", True) or page.update(),
-        ),
-        border_radius=40,
-        padding=ft.padding.symmetric(vertical=5, horizontal=10),
-        margin=10,
-    )
-
-    # LÓGICA DE PRIORIDAD (DISEÑO SEGMENTADO)
-    prioridad_container = ft.Container() # Contenedor vacío para refrescar
-
-    def actualizar_prioridad(valor):
-        estado["prioridad"] = valor
-        prioridad_container.content = crear_selector_prioridad()
-        page.update()
-
-    def crear_selector_prioridad():
-        opciones = ["Baja", "Media", "Alta"]
-        botones = []
-        for op in opciones:
-            es_sel = op == estado["prioridad"]
-            botones.append(
-                ft.Container(
-                    content=ft.Text(op, color=ft.Colors.BLACK if es_sel else ft.Colors.GREY_700, weight="bold" if es_sel else "normal"),
-                    alignment=ft.alignment.center,
-                    expand=True,
-                    height=40,
-                    bgcolor=ft.Colors.WHITE if es_sel else None,
-                    border_radius=20,
-                    shadow=ft.BoxShadow(blur_radius=4, color=ft.Colors.BLACK12) if es_sel else None,
-                    on_click=lambda e, val=op: actualizar_prioridad(val)
-                )
-            )
-        return ft.Container(
-            content=ft.Row(botones, spacing=0),
-            bgcolor="#F2F2E7",
-            border_radius=25,
-            padding=5,
         )
 
-    prioridad_container.content = crear_selector_prioridad()
+        self.nombre_tarea = ft.Text(value='Nombre de la Tarea')
+        self.tarea_input = ft.TextField(label='Ej. Comprar leche', autofocus=True)
 
-    # Boton de cancelar tarea
-    cancelar = ft.ElevatedButton(
-        content=ft.Row(
-            [
-                ft.Text(value='Cancelar', size=20),
-            ],
-            tight=True,
-            spacing=10
-        ),
-        expand=1,
-        style=ft.ButtonStyle(
-                shape=ft.RoundedRectangleBorder(radius=15),
-            )
-    )
+        self.descripcion_tarea = ft.Text(value='Descripción')
+        self.opcional_descripcion_tarea = ft.Text(value='(Opcional)')
+        self.descripcion_input = ft.TextField(label='Añadir detalles...')
 
-    # Boton de guardar tarea
-    guardar = ft.ElevatedButton(
-        content=ft.Row(
-            [
-                ft.Text('Guardar Tarea',size=20),
-            ],
-            tight=True,
-            spacing=10
-        ),
-        expand=1,
-        style=ft.ButtonStyle(
-                shape=ft.RoundedRectangleBorder(radius=15),
-            )
-    )
+        def al_cambiar_fecha(e):
+            if self.date_picker.value:
+                self.fecha_seleccionada = self.date_picker.value.strftime("%a %d, %b")
+                self.texto_fecha.value = self.fecha_seleccionada
+                page.update()
 
-    # Contenedor Botones
-    botones_contenedor = ft.Container(
-        ft.Row(
-            [
-                cancelar,
-                guardar
-            ],
-            alignment=ft.MainAxisAlignment.CENTER,
-            vertical_alignment=ft.CrossAxisAlignment.CENTER,
+        self.date_picker = ft.DatePicker(
+            on_change=al_cambiar_fecha,
+        )
+        page.overlay.append(self.date_picker)
+
+        self.ahora = datetime.now()
+        self.ahora_formateado = self.ahora.strftime("%a %d, %b")
+
+        self.texto_fecha = ft.Text(self.ahora_formateado, color=ft.Colors.GREY_700)
+        
+        self.selector_tarjeta = ft.Container(
+            content=ft.ListTile(
+                leading=ft.Container(
+                    content=ft.Icon(ft.Icons.CALENDAR_MONTH_OUTLINED, color=ft.Colors.BLACK),
+                    bgcolor=ft.Colors.YELLOW_100,
+                    padding=10,
+                    border_radius=25,
+                ),
+                title=ft.Text("Fecha de vencimiento", weight=ft.FontWeight.BOLD),
+                subtitle=self.texto_fecha,
+                trailing=ft.Icon(ft.Icons.CHEVRON_RIGHT),
+                on_click=lambda _: setattr(self.date_picker, "open", True) or page.update(),
             ),
-            alignment=ft.alignment.center,
-            adaptive=True
-    )
+            border_radius=40,
+            padding=ft.padding.symmetric(vertical=5, horizontal=10),
+            margin=10,
+        )
 
-    # Categorias
-    texto_categorias = ft.Text(value='Categoría')
-    
-    def guardar_tarea(e):
-        prioridad_final = estado["prioridad"]
-        print(f"Tarea guardada: {tarea_input.value}")
-        print(f"Guardando tarea con prioridad: {prioridad_final}")
-        page.go("/") # Regresa al inicio tras guardar
+        # LÓGICA DE PRIORIDAD (DISEÑO SEGMENTADO)
+        self.prioridad_container = ft.Container() # Contenedor vacío para refrescar
 
-    return ft.View(
-        "/create",
-        controls=[
-            appbar,
-            ft.SafeArea(
-                expand=True,
-                content=ft.Column([                    
-                    nombre_tarea,
-                    tarea_input,
-                    ft.Row([
-                        descripcion_tarea,
-                        opcional_descripcion_tarea,
-                    ]),
-                    descripcion_input,
-                    prioridad_container,
-                    selector_tarjeta,
-                    texto_categorias,
-                    ft.Container(expand=True),
-                    botones_contenedor
-                ],
-                spacing=20,
-                expand=True
+        def actualizar_prioridad(valor):
+            self.estado["prioridad"] = self.valor
+            self.prioridad_container.content = crear_selector_prioridad()
+            page.update()
+
+        def crear_selector_prioridad():
+            self.opciones = ["Baja", "Media", "Alta"]
+            self.botones = []
+            for self.op in self.opciones:
+                self.es_sel = self.op == self.estado["prioridad"]
+                self.botones.append(
+                    ft.Container(
+                        content=ft.Text(self.op, color=ft.Colors.BLACK if self.es_sel else ft.Colors.GREY_700, weight="bold" if self.es_sel else "normal"),
+                        alignment=ft.alignment.center,
+                        expand=True,
+                        height=40,
+                        bgcolor=ft.Colors.WHITE if self.es_sel else None,
+                        border_radius=20,
+                        shadow=ft.BoxShadow(blur_radius=4, color=ft.Colors.BLACK12) if self.es_sel else None,
+                        on_click=lambda e, val=self.op: actualizar_prioridad(val)
+                    )
                 )
+            return ft.Container(
+                content=ft.Row(self.botones, spacing=0),
+                bgcolor="#F2F2E7",
+                border_radius=25,
+                padding=5,
             )
-        ]
-    )
+
+        self.prioridad_container.content = crear_selector_prioridad()
+
+        # Boton de cancelar tarea
+        self.cancelar = ft.ElevatedButton(
+            content=ft.Row(
+                [
+                    ft.Text(value='Cancelar', size=20),
+                ],
+                tight=True,
+                spacing=10
+            ),
+            expand=1,
+            style=ft.ButtonStyle(
+                    shape=ft.RoundedRectangleBorder(radius=15),
+                )
+        )
+
+        # Boton de guardar tarea
+        self.guardar = ft.ElevatedButton(
+            content=ft.Row(
+                [
+                    ft.Text('Guardar Tarea',size=20),
+                ],
+                tight=True,
+                spacing=10
+            ),
+            expand=1,
+            style=ft.ButtonStyle(
+                    shape=ft.RoundedRectangleBorder(radius=15),
+                )
+        )
+
+        # Contenedor Botones
+        self.botones_contenedor = ft.Container(
+            ft.Row(
+                [
+                    self.cancelar,
+                    self.guardar
+                ],
+                alignment=ft.MainAxisAlignment.CENTER,
+                vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                ),
+                alignment=ft.alignment.center,
+                adaptive=True
+        )
+
+        # Categorias
+        self.texto_categorias = ft.Text(value='Categoría')
+
+        self.content = ft.SafeArea(
+            content=ft.Stack(
+                controls=[
+                    ft.Column(
+                        scroll=ft.ScrollMode.ADAPTIVE,
+                        expand=True,
+                        spacing=20,
+                        controls=[
+                            self.appbar,
+                            self.nombre_tarea,
+                            self.tarea_input,
+                            ft.Row([self.descripcion_tarea, self.opcional_descripcion_tarea]),
+                            self.descripcion_input,
+                            self.prioridad_container,
+                            self.selector_tarjeta,
+                            self.texto_categorias,
+                            ft.Container(expand=True),
+                            self.botones_contenedor
+                        ]
+                    )
+                ]
+            )
+        )
