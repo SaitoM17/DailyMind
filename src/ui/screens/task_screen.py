@@ -85,17 +85,36 @@ class TareasScreen(ft.Container):
                 ft.DropdownOption('Hogar')
             ]
         )
-        # self.racha = ft.Container(
-        #     content=self.dias_racha,
-        #     margin=0,
-        #     padding=2,
-        #     # alignment=ft.alignment.center,
-        #     # bgcolor=ft.Colors.WHITE,
-        #     # width=90,
-        #     height=36,
-        #     border_radius=15,
-        # )
+        
+        self.contenedor_fecha = ft.Container(
+            content=self.selector_fecha,
+            margin=0,
+            padding=2,
+            alignment=ft.alignment.center,
+            bgcolor=ft.Colors.WHITE,
+            height=36,
+            border_radius=15
+        )
 
+        self.contenedor_prioridad = ft.Container(
+            content=self.selector_prioridad,
+            margin=0,
+            padding=2,
+            alignment=ft.alignment.center,
+            bgcolor=ft.Colors.WHITE,
+            height=36,
+            border_radius=15
+        )
+
+        self.contenedor_categoria = ft.Container(
+            content=self.selector_categoria,
+            margin=0,
+            padding=2,
+            alignment=ft.alignment.center,
+            bgcolor=ft.Colors.WHITE,
+            height=36,
+            border_radius=15
+        )
 
 
         self.content = ft.SafeArea(
@@ -110,9 +129,25 @@ class TareasScreen(ft.Container):
                                 controls=[ft.Container(self.tareas_pendientes)]
                             ),
                             self.prioridad_container,
-                            self.selector_fecha,
-                            self.selector_prioridad,
-                            self.selector_categoria
+                            ft.Row(
+                                spacing=20,
+                                alignment=ft.MainAxisAlignment.CENTER,
+                                vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                                controls=[
+                                    ft.Column(
+                                        spacing=20,
+                                        controls=[self.contenedor_fecha]
+                                    ),
+                                    ft.Column(
+                                        spacing=20,
+                                        controls=[self.contenedor_prioridad]
+                                    ),
+                                    ft.Column(
+                                        spacing=20,
+                                        controls=[self.contenedor_categoria]
+                                    )
+                                ]
+                            )
                         ]
                     ),
                     ft.Container(
