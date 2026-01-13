@@ -79,31 +79,38 @@ class CrearEditarEliminarTareaScreen(ft.Container):
         # LÓGICA DE PRIORIDAD (DISEÑO SEGMENTADO)
         self.prioridad_container = ft.Container() # Contenedor vacío para refrescar
 
-        def actualizar_prioridad(valor):
-            self.estado["prioridad"] = self.valor
+        def actualizar_prioridad(valor_seleccionado):
+            self.estado['prioridad'] = valor_seleccionado
             self.prioridad_container.content = crear_selector_prioridad()
-            page.update()
+            self.page.update() # Asegúrate de usar self.page
 
         def crear_selector_prioridad():
-            self.opciones = ["Baja", "Media", "Alta"]
-            self.botones = []
-            for self.op in self.opciones:
-                self.es_sel = self.op == self.estado["prioridad"]
-                self.botones.append(
+            opciones = ['Baja', 'Media', 'Alta']
+            botones = []
+            
+            for opcion in opciones:
+                es_sel = opcion == self.estado['prioridad']
+                
+                botones.append(
                     ft.Container(
-                        content=ft.Text(self.op, color=ft.Colors.BLACK if self.es_sel else ft.Colors.GREY_700, weight="bold" if self.es_sel else "normal"),
+                        content=ft.Text(
+                            opcion, 
+                            color=ft.Colors.BLACK if es_sel else ft.Colors.GREY_700, 
+                            weight='bold' if es_sel else 'normal'
+                        ),
                         alignment=ft.alignment.center,
                         expand=True,
                         height=40,
-                        bgcolor=ft.Colors.WHITE if self.es_sel else None,
+                        bgcolor=ft.Colors.WHITE if es_sel else None,
                         border_radius=20,
-                        shadow=ft.BoxShadow(blur_radius=4, color=ft.Colors.BLACK12) if self.es_sel else None,
-                        on_click=lambda e, val=self.op: actualizar_prioridad(val)
+                        shadow=ft.BoxShadow(blur_radius=4, color=ft.Colors.BLACK12) if es_sel else None,
+                        on_click=lambda e, val=opcion: actualizar_prioridad(val)
                     )
                 )
+                
             return ft.Container(
-                content=ft.Row(self.botones, spacing=0),
-                bgcolor="#F2F2E7",
+                content=ft.Row(botones, spacing=0),
+                bgcolor='#F2F2E7',
                 border_radius=25,
                 padding=5,
             )
