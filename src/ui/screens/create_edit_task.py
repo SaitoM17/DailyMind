@@ -141,6 +141,7 @@ class CrearEditarEliminarTareaScreen(ft.Container):
                 tight=True,
                 spacing=10
             ),
+            on_click=self.guardar_tarea,
             expand=1,
             style=ft.ButtonStyle(
                     shape=ft.RoundedRectangleBorder(radius=15),
@@ -187,3 +188,14 @@ class CrearEditarEliminarTareaScreen(ft.Container):
                 ]
             )
         )
+        
+    def guardar_tarea(self, e):
+        self.nombre_tarea_input = self.tarea_input.value
+        self.descripcion_tarea_input = self.descripcion_input.value
+        self.fecha_seleccionada_input = self.texto_fecha.value
+        self.priorirdad_tarea_input = self.estado['prioridad']
+
+        print(f'Nombre de tarea: {self.nombre_tarea_input}')
+        print(f'Descripción: {self.descripcion_tarea_input}')
+        print(f'Fecha de tarea: {self.fecha_seleccionada_input}')
+        print(f'Prioridad de tarea: {self.priorirdad_tarea_input}')
