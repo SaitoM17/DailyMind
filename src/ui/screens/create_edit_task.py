@@ -191,22 +191,17 @@ class CrearEditarEliminarTareaScreen(ft.Container):
         )
         
     def guardar_tarea(self, e):
-        lista_tareas = self.page.session.get("mis_tareas") or []
-        
+        tareas = list(database.get("mis_tareas"))
+
         nueva_tarea = {
-            'nombre': self.tarea_input.value,
-            'fecha': self.texto_fecha.value,
-            'prioridad': self.estado['prioridad']
+            "nombre": self.tarea_input.value,
+            "fecha": self.texto_fecha.value,
+            "prioridad": self.estado["prioridad"],
+            "completada": False
         }
-        
-        lista_tareas.append(nueva_tarea)
-        # Guardar de nuevo en la sesión
-        self.page.session.set("mis_tareas", lista_tareas)
-        print(f'Tarea Guardada\nTarea: {nueva_tarea['nombre']}\nPrioridad: {nueva_tarea['prioridad']}\nFecha: {nueva_tarea['fecha']}')
-        if hasattr(self.page, "refrescar_tareas"):
-            self.page.refrescar_tareas()
-        
-        
-        
-        self.page.go('/')
-        self.page.update()
+
+        tareas.append(nueva_tarea)
+
+        database.set("mis_tareas", tareas)
+
+        self.page.go("/")
