@@ -156,7 +156,7 @@ class TareasScreen(ft.Container):
                         ),
                         padding=10,
                         bgcolor=ft.Colors.WHITE,
-                        border_radius=10,
+                        border_radius=50,
                         border=ft.border.all(1, ft.Colors.BLACK12)
                     )
                 )
