@@ -1,0 +1,1 @@
+tareas_globales = []  # Aquí se guardarán los diccionarios de cada tarea
