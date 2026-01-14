@@ -1,9 +1,11 @@
 import flet as ft
 from ui.components.button_task import ButtonCrearTarea
+import database
 
 class TareasScreen(ft.Container):
     def __init__(self, page: ft.Page):
         super().__init__()
+        self.page = page
 
         self.cantidad_tareas_pendinetes = '4'
         self.tareas_pendientes = ft.Text(value=f'Tienes {self.cantidad_tareas_pendinetes} tareas pendientes')
@@ -120,6 +122,19 @@ class TareasScreen(ft.Container):
             run_spacing=0,   # Evitamos que salten de línea
             alignment=ft.MainAxisAlignment.CENTER
         )
+        
+        self.tareas_view = ft.Column()
+        self.on_mount = self.inicializar_componente
+
+        
+        # self.tareas_contenedor = ft.Container(
+        #     content=self.tareas_view,
+        #     margin=0,
+        #     padding=2,
+        #     alignment=ft.alignment.center,
+        #     border_radius=10,
+        #     col={"xs": 12, "md": 6, "lg": 4}
+        # )
 
         self.content = ft.SafeArea(
             content=ft.Stack(
@@ -136,7 +151,8 @@ class TareasScreen(ft.Container):
                             ft.Container(
                                 padding=ft.padding.symmetric(horizontal=5),
                                 content=self.fila_desplegables
-                            )                            
+                            ),
+                            self.tareas_view                            
                         ]
                     ),
                     ft.Container(
@@ -147,3 +163,37 @@ class TareasScreen(ft.Container):
                 ]
             )
         )
+
+    
+    
+    def inicializar_componente(self, e):
+            # Este código corre cuando self.page ya NO es None
+            self.page.refrescar_tareas = self.refrescar_lista
+            self.refrescar_lista()
+
+    def refrescar_lista(self):
+        # Obtenemos las tareas (usando session o tu database)
+        tareas = self.page.session.get("mis_tareas") or []
+        print(f"DEBUG: Tareas encontradas: {len(tareas)}")
+            
+        self.tareas_view.controls.clear()
+        for t in tareas:
+            self.tareas_view.controls.append(
+                ft.Container(
+                    content=ft.Row([
+                        ft.Checkbox(value=False),
+                        ft.Column([
+                            ft.Text(t['nombre'], weight="bold"),
+                            ft.Text(f"{t['fecha']} | {t['prioridad']}", size=12)
+                        ], spacing=0)
+                    ]),
+                    padding=10,
+                    bgcolor=ft.Colors.WHITE,
+                    border_radius=10,
+                    border=ft.border.all(1, ft.Colors.BLACK12)
+                )
+            )
+        
+        # Actualizar contador y página
+        # self.tareas_pendientes.value = f"Tienes {len(tareas)} tareas pendientes"
+        self.page.update()
