@@ -1,6 +1,7 @@
 import flet as ft
 import locale
 from datetime import datetime
+import database
 
 class CrearEditarEliminarTareaScreen(ft.Container):
     def __init__(self, page: ft.Page):
@@ -190,12 +191,22 @@ class CrearEditarEliminarTareaScreen(ft.Container):
         )
         
     def guardar_tarea(self, e):
-        self.nombre_tarea_input = self.tarea_input.value
-        self.descripcion_tarea_input = self.descripcion_input.value
-        self.fecha_seleccionada_input = self.texto_fecha.value
-        self.priorirdad_tarea_input = self.estado['prioridad']
-
-        print(f'Nombre de tarea: {self.nombre_tarea_input}')
-        print(f'Descripción: {self.descripcion_tarea_input}')
-        print(f'Fecha de tarea: {self.fecha_seleccionada_input}')
-        print(f'Prioridad de tarea: {self.priorirdad_tarea_input}')
+        lista_tareas = self.page.session.get("mis_tareas") or []
+        
+        nueva_tarea = {
+            'nombre': self.tarea_input.value,
+            'fecha': self.texto_fecha.value,
+            'prioridad': self.estado['prioridad']
+        }
+        
+        lista_tareas.append(nueva_tarea)
+        # Guardar de nuevo en la sesión
+        self.page.session.set("mis_tareas", lista_tareas)
+        print(f'Tarea Guardada\nTarea: {nueva_tarea['nombre']}\nPrioridad: {nueva_tarea['prioridad']}\nFecha: {nueva_tarea['fecha']}')
+        if hasattr(self.page, "refrescar_tareas"):
+            self.page.refrescar_tareas()
+        
+        
+        
+        self.page.go('/')
+        self.page.update()
