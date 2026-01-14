@@ -123,18 +123,47 @@ class TareasScreen(ft.Container):
             alignment=ft.MainAxisAlignment.CENTER
         )
         
-        self.tareas_view = ft.Column()
-        self.on_mount = self.inicializar_componente
+        self.tareas_container = ft.Container()
 
-        
-        # self.tareas_contenedor = ft.Container(
-        #     content=self.tareas_view,
-        #     margin=0,
-        #     padding=2,
-        #     alignment=ft.alignment.center,
-        #     border_radius=10,
-        #     col={"xs": 12, "md": 6, "lg": 4}
-        # )
+        def refrescar_lista():
+            self.tareas_container.content = crear_lista_tareas()
+            self.page.update()
+
+        def crear_lista_tareas():
+            tareas = database.get("mis_tareas") or []
+
+            lista = ft.Column(spacing=10)
+
+            for t in tareas:
+                lista.controls.append(
+                    ft.Container(
+                        content=ft.Row(
+                            [
+                                ft.Checkbox(value=t["completada"]),
+                                ft.Column(
+                                    [
+                                        ft.Text(t["nombre"], weight="bold"),
+                                        ft.Text(
+                                            f"{t['fecha']} | {t['prioridad']}",
+                                            size=12,
+                                            color=ft.Colors.GREY_700
+                                        )
+                                    ],
+                                    spacing=2
+                                )
+                            ],
+                            spacing=10
+                        ),
+                        padding=10,
+                        bgcolor=ft.Colors.WHITE,
+                        border_radius=10,
+                        border=ft.border.all(1, ft.Colors.BLACK12)
+                    )
+                )
+
+            return lista
+
+        self.tareas_container.content = crear_lista_tareas()
 
         self.content = ft.SafeArea(
             content=ft.Stack(
@@ -152,7 +181,7 @@ class TareasScreen(ft.Container):
                                 padding=ft.padding.symmetric(horizontal=5),
                                 content=self.fila_desplegables
                             ),
-                            self.tareas_view                            
+                            self.tareas_container                            
                         ]
                     ),
                     ft.Container(
@@ -163,37 +192,3 @@ class TareasScreen(ft.Container):
                 ]
             )
         )
-
-    
-    
-    def inicializar_componente(self, e):
-            # Este código corre cuando self.page ya NO es None
-            self.page.refrescar_tareas = self.refrescar_lista
-            self.refrescar_lista()
-
-    def refrescar_lista(self):
-        # Obtenemos las tareas (usando session o tu database)
-        tareas = self.page.session.get("mis_tareas") or []
-        print(f"DEBUG: Tareas encontradas: {len(tareas)}")
-            
-        self.tareas_view.controls.clear()
-        for t in tareas:
-            self.tareas_view.controls.append(
-                ft.Container(
-                    content=ft.Row([
-                        ft.Checkbox(value=False),
-                        ft.Column([
-                            ft.Text(t['nombre'], weight="bold"),
-                            ft.Text(f"{t['fecha']} | {t['prioridad']}", size=12)
-                        ], spacing=0)
-                    ]),
-                    padding=10,
-                    bgcolor=ft.Colors.WHITE,
-                    border_radius=10,
-                    border=ft.border.all(1, ft.Colors.BLACK12)
-                )
-            )
-        
-        # Actualizar contador y página
-        # self.tareas_pendientes.value = f"Tienes {len(tareas)} tareas pendientes"
-        self.page.update()
