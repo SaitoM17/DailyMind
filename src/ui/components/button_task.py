@@ -3,6 +3,8 @@ import flet as ft
 class ButtonCrearTarea(ft.ElevatedButton):
     def __init__(self, page: ft.Page):
         super().__init__()
+        self.page = page
+        
         self.content=ft.Row(
             [
                 ft.Text(value='Nueva Tarea', size=18),
@@ -19,4 +21,5 @@ class ButtonCrearTarea(ft.ElevatedButton):
             )
 
     def nueva_tarea(self, e):
+        self.page.client_storage.set('return_route', self.page.route)
         self.page.go("/create")
