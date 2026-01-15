@@ -169,6 +169,44 @@ class CrearEditarEliminarTareaScreen(ft.Container):
 
         # Categorias
         self.texto_categorias = ft.Text(value='Categoría')
+        self.categoria_seleccionada = None
+        self.categoria_contenedor = ft.Container()
+
+        def refrescar_lista_categorias():
+            self.categoria_contenedor.content = crear_lista_categorias()
+            self.page.update()
+
+        def crear_lista_categorias():
+            categorias = database.get_categoria("mis_categorias") or []
+
+            return ft.ResponsiveRow(
+                spacing=10,
+                run_spacing=10,
+                controls=[
+                    ft.Container(
+                        content=ft.Text(
+                            value=c["categoria"],
+                            weight=ft.FontWeight.BOLD,
+                            color=ft.Colors.WHITE if c["categoria"] == self.categoria_seleccionada else ft.Colors.BLACK,
+                            text_align=ft.TextAlign.CENTER
+                        ),
+                        alignment=ft.alignment.center,
+                        bgcolor=ft.Colors.BLUE if c["categoria"] == self.categoria_seleccionada else ft.Colors.WHITE,
+                        border_radius=50,
+                        padding=12,
+                        col={"xs": 4, "md": 4, "lg": 4},
+                        animate=ft.Animation(200, "easeInOut"),
+                        on_click=lambda e, cat=c["categoria"]: seleccionar_categoria(cat)
+                    )
+                    for c in categorias
+                ]
+            )
+        
+        def seleccionar_categoria(categoria):
+            self.categoria_seleccionada = categoria
+            refrescar_lista_categorias()
+
+        self.categoria_contenedor.content = crear_lista_categorias()
 
         self.content = ft.SafeArea(
             content=ft.Stack(
@@ -185,7 +223,12 @@ class CrearEditarEliminarTareaScreen(ft.Container):
                             self.descripcion_input,
                             self.prioridad_container,
                             self.selector_tarjeta,
-                            self.texto_categorias,                                                        
+                            self.texto_categorias,
+                            ft.ResponsiveRow(
+                                controls=[
+                                    self.categoria_contenedor,
+                                ]
+                            )
                         ]
                     ),
                     self.botones_contenedor
