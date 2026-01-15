@@ -6,6 +6,7 @@ class TareasScreen(ft.Container):
     def __init__(self, page: ft.Page):
         super().__init__()
         self.page = page
+        self.expand = True
 
         self.cantidad_tareas_pendinetes = '4'
         self.tareas_pendientes = ft.Text(value=f'Tienes {self.cantidad_tareas_pendinetes} tareas pendientes')
@@ -160,6 +161,8 @@ class TareasScreen(ft.Container):
                         border=ft.border.all(1, ft.Colors.BLACK12)
                     )
                 )
+            
+            lista.controls.append(ft.Container(height=50))
 
             return lista
 
@@ -189,6 +192,7 @@ class TareasScreen(ft.Container):
                         bottom=10,
                         right=10
                     )
-                ]
+                ],
+                expand=True
             )
         )
