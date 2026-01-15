@@ -19,7 +19,7 @@ class CrearEditarEliminarTareaScreen(ft.Container):
             controls=[
                 ft.IconButton(
                         icon=ft.Icons.CLEAR,
-                        on_click=lambda _: self.page.go('/')
+                        on_click=lambda _: self.volver()
                     ),
                 ft.Container(
                     content=ft.Text(
@@ -204,4 +204,8 @@ class CrearEditarEliminarTareaScreen(ft.Container):
 
         database.set("mis_tareas", tareas)
 
-        self.page.go("/")
+        self.volver()
+    
+    def volver(self):
+        return_route = self.page.client_storage.get("return_route") or "/"
+        self.page.go(return_route)
