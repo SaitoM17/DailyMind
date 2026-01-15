@@ -151,17 +151,20 @@ class CrearEditarEliminarTareaScreen(ft.Container):
         )
 
         # Contenedor Botones
-        self.botones_contenedor = ft.Container(
-            ft.Row(
-                [
-                    self.cancelar,
-                    self.guardar
-                ],
-                alignment=ft.MainAxisAlignment.CENTER,
-                vertical_alignment=ft.CrossAxisAlignment.CENTER,
+        self.botones_contenedor = ft.Column(
+            controls=[
+                ft.Row(
+                    controls=[
+                        self.cancelar,
+                        self.guardar
+                    ],
+                    alignment=ft.MainAxisAlignment.CENTER,
+                    vertical_alignment=ft.CrossAxisAlignment.CENTER,
                 ),
-                alignment=ft.alignment.center,
-                adaptive=True
+            ],
+            alignment=ft.MainAxisAlignment.END,
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            adaptive=True
         )
 
         # Categorias
@@ -182,12 +185,12 @@ class CrearEditarEliminarTareaScreen(ft.Container):
                             self.descripcion_input,
                             self.prioridad_container,
                             self.selector_tarjeta,
-                            self.texto_categorias,
-                            ft.Container(expand=True),
-                            self.botones_contenedor
+                            self.texto_categorias,                                                        
                         ]
-                    )
-                ]
+                    ),
+                    self.botones_contenedor
+                ],
+                expand=True
             )
         )
         
