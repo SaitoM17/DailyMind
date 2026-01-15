@@ -127,6 +127,7 @@ class CrearEditarEliminarTareaScreen(ft.Container):
                 tight=True,
                 spacing=10
             ),
+            on_click=self.cancelar_tarea,
             expand=1,
             style=ft.ButtonStyle(
                     shape=ft.RoundedRectangleBorder(radius=15),
@@ -204,6 +205,9 @@ class CrearEditarEliminarTareaScreen(ft.Container):
 
         database.set("mis_tareas", tareas)
 
+        self.volver()
+
+    def cancelar_tarea(self, e):
         self.volver()
     
     def volver(self):
