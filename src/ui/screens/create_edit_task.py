@@ -238,18 +238,19 @@ class CrearEditarEliminarTareaScreen(ft.Container):
         )
         
     def guardar_tarea(self, e):
-        tareas = list(database.get("mis_tareas"))
+        tareas = list(database.get('mis_tareas'))
 
         nueva_tarea = {
-            "nombre": self.tarea_input.value,
-            "fecha": self.texto_fecha.value,
-            "prioridad": self.estado["prioridad"],
-            "completada": False
+            'nombre': self.tarea_input.value,
+            'categoria': self.categoria_seleccionada,
+            'fecha': self.texto_fecha.value,
+            'prioridad': self.estado['prioridad'],
+            'completada': False
         }
 
         tareas.append(nueva_tarea)
 
-        database.set("mis_tareas", tareas)
+        database.set('mis_tareas', tareas)
 
         self.volver()
 
@@ -257,5 +258,5 @@ class CrearEditarEliminarTareaScreen(ft.Container):
         self.volver()
     
     def volver(self):
-        return_route = self.page.client_storage.get("return_route") or "/"
+        return_route = self.page.client_storage.get('return_route') or '/'
         self.page.go(return_route)
