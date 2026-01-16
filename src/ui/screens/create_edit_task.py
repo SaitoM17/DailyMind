@@ -228,7 +228,8 @@ class CrearEditarEliminarTareaScreen(ft.Container):
                                 controls=[
                                     self.categoria_contenedor,
                                 ]
-                            )
+                            ),
+                            ft.Container(height=50)
                         ]
                     ),
                     self.botones_contenedor
