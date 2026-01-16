@@ -145,7 +145,7 @@ class TareasScreen(ft.Container):
                                     [
                                         ft.Text(t["nombre"], weight="bold"),
                                         ft.Text(
-                                            f"{t['fecha']} | {t['prioridad']}",
+                                            f"{t['categoria']} | {t['fecha']} | {t['prioridad']}",
                                             size=12,
                                             color=ft.Colors.GREY_700
                                         )
