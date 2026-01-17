@@ -38,7 +38,8 @@ class HabitosScreen(ft.Container):
             ),
             alignment=ft.alignment.center,
             bgcolor=ft.Colors.WHITE,
-            border_radius=20
+            border_radius=20,
+            col={"xs": 6, "md": 6, "lg": 4}
         )
 
         # Contenedor 2 Racha
@@ -72,7 +73,8 @@ class HabitosScreen(ft.Container):
             ),
             alignment=ft.alignment.center,
             bgcolor=ft.Colors.WHITE,
-            border_radius=20
+            border_radius=20,
+            col={"xs": 6, "md": 6, "lg": 4}
         )
 
         self.content = ft.SafeArea(
@@ -83,8 +85,12 @@ class HabitosScreen(ft.Container):
                         expand=True,
                         controls=[
                             texto_prueba,
-                            self.contenedor_habitos,
-                            self.contenedor_racha
+                            ft.ResponsiveRow(
+                                controls=[
+                                    self.contenedor_habitos,
+                                    self.contenedor_racha
+                                ]
+                            )
                         ]
                     )
                 ]
