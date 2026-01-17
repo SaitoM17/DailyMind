@@ -125,49 +125,10 @@ class TareasScreen(ft.Container):
         )
         
         self.tareas_container = ft.Container()
+        self.tarea_seleccionada = None
 
-        def refrescar_lista():
-            self.tareas_container.content = crear_lista_tareas()
-            self.page.update()
-
-        def crear_lista_tareas():
-            tareas = database.get("mis_tareas") or []
-
-            lista = ft.Column(spacing=10)
-
-            for t in tareas:
-                lista.controls.append(
-                    ft.Container(
-                        content=ft.Row(
-                            [
-                                ft.Checkbox(value=t["completada"]),
-                                ft.Column(
-                                    [
-                                        ft.Text(t["nombre"], weight="bold"),
-                                        ft.Text(
-                                            f"{t['categoria']} | {t['fecha']} | {t['prioridad']}",
-                                            size=12,
-                                            color=ft.Colors.GREY_700
-                                        )
-                                    ],
-                                    spacing=2
-                                )
-                            ],
-                            spacing=10
-                        ),
-                        padding=10,
-                        bgcolor=ft.Colors.WHITE,
-                        border_radius=50,
-                        border=ft.border.all(1, ft.Colors.BLACK12)
-                    )
-                )
-            
-            lista.controls.append(ft.Container(height=50))
-
-            return lista
-
-        self.tareas_container.content = crear_lista_tareas()
-
+        self.tareas_container.content = self.crear_lista_tareas()
+    
         self.content = ft.SafeArea(
             content=ft.Stack(
                 controls=[
@@ -196,3 +157,98 @@ class TareasScreen(ft.Container):
                 expand=True
             )
         )
+
+    def seleccionar_tarea(self, tarea):
+        self.tarea_seleccionada = tarea
+        self.tareas_container.content = self.crear_lista_tareas()
+        self.page.update()
+        self.abrir_detalles(tarea)
+
+    def abrir_detalles(self, tarea):
+        def cerrar(e):
+            dialogo.open = False
+            self.page.update()
+
+        def editar(e):
+            cerrar(e)
+            self.page.go(f'/edit?nombre={tarea["nombre"]}')
+
+        def eliminar(e):
+            tareas = database.get('mis_tareas') or []
+            tareas = [t for t in tareas if t != tarea]
+            database.set('mis_tareas', tareas)
+
+            self.tarea_seleccionada = None
+            self.refrescar_lista()
+            cerrar(e)
+
+        dialogo = ft.AlertDialog(
+            modal=True,
+            title=ft.Text(tarea['nombre']),
+            content=ft.Column(
+                [
+                    ft.Text(f'📅 Fecha: {tarea['fecha']}'),
+                    ft.Text(f'🔥 Prioridad: {tarea['prioridad']}'),
+                    ft.Text(f'📝 Descripción: {tarea.get('descripcion', 'Sin descripción')}'),
+                ],
+                tight=True,
+            ),
+            actions=[
+                ft.TextButton('Cerrar', on_click=cerrar),
+                ft.OutlinedButton('Eliminar', icon=ft.Icons.DELETE, on_click=eliminar),
+                ft.ElevatedButton('Editar', icon=ft.Icons.EDIT, on_click=editar),
+            ],
+        )
+
+        self.page.overlay.clear()
+        self.page.overlay.append(dialogo)
+        dialogo.open = True
+        self.page.update()
+
+
+    def refrescar_lista(self):
+        self.tareas_container.content = self.crear_lista_tareas()
+        self.page.update()
+
+    def crear_lista_tareas(self):
+        tareas = database.get('mis_tareas') or []
+
+        lista = ft.Column(spacing=10)
+
+        for t in tareas:
+            seleccionada = self.tarea_seleccionada == t
+
+            lista.controls.append(
+                ft.Container(
+                    content=ft.Row(
+                        [
+                            ft.Checkbox(value=t['completada']),
+                            ft.Column(
+                                [
+                                    ft.Text(t['nombre'], weight='bold'),
+                                    ft.Text(
+                                        f"{t['categoria']} | {t['fecha']} | {t['prioridad']}",
+                                        size=12,
+                                        color=ft.Colors.GREY_700
+                                    )
+                                ],
+                                spacing=2
+                            )
+                        ],
+                        spacing=10
+                    ),
+                    padding=10,
+                    bgcolor=ft.Colors.BLUE_50 if seleccionada else ft.Colors.WHITE,
+                    border_radius=12,
+                    border=ft.border.all(
+                        2 if seleccionada else 1,
+                        ft.Colors.BLUE if seleccionada else ft.Colors.BLACK12
+                    ),
+                    on_click=lambda e, t=t: self.seleccionar_tarea(t)
+                )
+            )
+
+                
+        lista.controls.append(ft.Container(height=50))
+
+        return lista
