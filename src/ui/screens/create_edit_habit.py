@@ -4,13 +4,13 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
     def __init__(self, page: ft.Page):
         super().__init__()
         self.page = page
-        self.expand = True # Para que ocupe todo el espacio en el View
+        self.expand = True 
 
         self.appbar = ft.Row(
             controls=[
                 ft.IconButton(
                         icon=ft.Icons.CLEAR,
-                        on_click=lambda _: self.page.go('/')
+                        on_click=lambda _: self.volver()
                     ),
                 ft.Container(
                     content=ft.Text(
@@ -60,3 +60,10 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
     def guardar_habito(self, e):
         print(f'Hábito guardado: {self.task_input.value}')
         self.page.go('/')
+
+    def cancelar_tarea(self, e):
+        self.volver()
+    
+    def volver(self):
+        return_route = self.page.client_storage.get('return_route') or '/'
+        self.page.go(return_route)
