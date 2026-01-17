@@ -64,7 +64,11 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
                             self.nombre_habito,
                             self.habito_input,
                             self.texto_medicion,
-                            self.contenedor_medicion
+                            self.contenedor_medicion,
+                            ft.ElevatedButton(
+                                text='Guardar',
+                                on_click=self.guardar_habito
+                            )
                         ]
                     )
                 ]
@@ -72,8 +76,14 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
         )
 
     def guardar_habito(self, e):
-        print(f'Hábito guardado: {self.task_input.value}')
-        self.page.go('/')
+        print(f'Hábito guardado: {self.habito_input.value}')
+
+        if self.contenedor_medicion.value == '1':
+            print(f'Medición: Completar (sí/no)')
+        else:
+            print(f'Medición: Medible')
+        
+        self.volver()
 
     def cancelar_tarea(self, e):
         self.volver()
