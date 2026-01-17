@@ -27,12 +27,9 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
             vertical_alignment=ft.CrossAxisAlignment.CENTER
         )
 
-        self.habito_texto = ft.Text(value='Nombre del hábito')
-        self.habito_input = ft.TextField(
-            label='Ej. Leer 10 páginas', 
-            autofocus=True,
-            border_color='blue'
-        )
+        # Nombre del hábito
+        self.nombre_habito = ft.Text(value='Nombre del Hábito')
+        self.habito_input = ft.TextField(label='Ej. Leer 10 páginas', autofocus=True)
 
         # Definimos el contenido siguiendo tu estructura
         self.content = ft.SafeArea(
@@ -43,14 +40,9 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
                         expand=True,
                         spacing=20,
                         controls=[
-                            self.appbar,
-                            # Cuerpo del formulario
-                            self.habito_texto,
-                            self.habito_input,
-                            ft.ElevatedButton(
-                                text='Guardar Hábito',
-                                on_click=self.guardar_habito
-                            )
+                            self.appbar,                            
+                            self.nombre_habito,
+                            self.habito_input
                         ]
                     )
                 ]
