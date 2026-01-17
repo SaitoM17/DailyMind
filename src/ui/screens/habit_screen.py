@@ -1,8 +1,11 @@
 import flet as ft
+from ui.components.button_habit import ButtonCrearHabito
 
 class HabitosScreen(ft.Container):
     def __init__(self, page: ft.Page):
         super().__init__()
+        self.page = page
+        self.expand = True
 
         # Contenedor 1 Habitos Pendientes
         self.icono_contenedor1 = ft.Icon(name=ft.Icons.VERIFIED, color=ft.Colors.YELLOW, weight=ft.FontWeight.BOLD)
@@ -75,6 +78,15 @@ class HabitosScreen(ft.Container):
             col={"xs": 6, "md": 6, "lg": 4}
         )
 
+        self.boton_flotante = ft.Column(
+            controls=[
+                ButtonCrearHabito(page)
+            ],
+            alignment=ft.MainAxisAlignment.END,
+            horizontal_alignment=ft.CrossAxisAlignment.END,
+            spacing=10
+        )
+
         self.content = ft.SafeArea(
             content=ft.Stack(
                 controls=[
@@ -89,7 +101,13 @@ class HabitosScreen(ft.Container):
                                 ]
                             )
                         ]
+                    ),
+                    ft.Container(
+                        content=self.boton_flotante,
+                        bottom=10,
+                        right=10
                     )
-                ]
+                ],
+                expand=True
             )
         )
