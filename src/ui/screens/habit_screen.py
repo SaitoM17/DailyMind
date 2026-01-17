@@ -4,8 +4,6 @@ class HabitosScreen(ft.Container):
     def __init__(self, page: ft.Page):
         super().__init__()
 
-        texto_prueba = ft.Text('Texto de prueba, pantalla Hábitos')
-
         # Contenedor 1 Habitos Pendientes
         self.icono_contenedor1 = ft.Icon(name=ft.Icons.VERIFIED, color=ft.Colors.YELLOW, weight=ft.FontWeight.BOLD)
         self.fecha_contenedor1 = ft.Text(value='Hoy', weight=ft.FontWeight.BOLD, color=ft.Colors.BLACK)
@@ -83,8 +81,7 @@ class HabitosScreen(ft.Container):
                     ft.Column(
                         scroll=ft.ScrollMode.ADAPTIVE,
                         expand=True,
-                        controls=[
-                            texto_prueba,
+                        controls=[                            
                             ft.ResponsiveRow(
                                 controls=[
                                     self.contenedor_habitos,
