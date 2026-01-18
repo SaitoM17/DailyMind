@@ -53,47 +53,9 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
         )
 
         # Frecuencia
-        self.frecuencia_contenedor = ft.Container() # Contenedor vacío para refrescar
-
-        self.estado = {'frecuencia': 'Diaria'}
-
-        def actualizar_frecuencia(valor_seleccionado):
-            self.estado['frecuencia'] = valor_seleccionado
-            self.frecuencia_contenedor.content = crear_selector_frecuencia()
-            self.page.update() 
-
-        def crear_selector_frecuencia():
-            opciones = ['Diaria', 'Semanal']
-            botones = []
-            
-            for opcion in opciones:
-                es_sel = opcion == self.estado['frecuencia']
-                
-                botones.append(
-                    ft.Container(
-                        content=ft.Text(
-                            opcion, 
-                            color=ft.Colors.BLACK if es_sel else ft.Colors.GREY_700, 
-                            weight='bold' if es_sel else 'normal'
-                        ),
-                        alignment=ft.alignment.center,
-                        expand=True,
-                        height=40,
-                        bgcolor=ft.Colors.WHITE if es_sel else None,
-                        border_radius=20,
-                        shadow=ft.BoxShadow(blur_radius=4, color=ft.Colors.BLACK12) if es_sel else None,
-                        on_click=lambda e, val=opcion: actualizar_frecuencia(val)
-                    )
-                )
-                
-            return ft.Container(
-                content=ft.Row(botones, spacing=0),
-                bgcolor='#F2F2E7',
-                border_radius=25,
-                padding=5,
-            )
-
-        self.frecuencia_contenedor.content = crear_selector_frecuencia()
+        self.frecuencia_contenedor = ft.Container()
+        self.estado_frecuencia = {'frecuencia': 'Diaria'}
+        self.frecuencia_contenedor.content = self.crear_selector_frecuencia(self.estado_frecuencia)
 
         # Calendario - semana
         self.semana_contenedor = ft.Container()
@@ -141,6 +103,42 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
     def volver(self):
         return_route = self.page.client_storage.get('return_route') or '/'
         self.page.go(return_route)
+    
+    def actualizar_frecuencia(self, valor_seleccionado):
+        self.estado_frecuencia['frecuencia'] = valor_seleccionado
+        self.frecuencia_contenedor.content = self.crear_selector_frecuencia(estado_frecuencia=self.estado_frecuencia)
+        self.page.update() 
+
+    def crear_selector_frecuencia(self, estado_frecuencia):
+        opciones = ['Diaria', 'Semanal']
+        botones = []
+            
+        for opcion in opciones:
+            es_sel = opcion == self.estado_frecuencia['frecuencia']
+                
+            botones.append(
+                ft.Container(
+                    content=ft.Text(
+                        opcion, 
+                        color=ft.Colors.BLACK if es_sel else ft.Colors.GREY_700, 
+                        weight='bold' if es_sel else 'normal'
+                    ),
+                    alignment=ft.alignment.center,
+                    expand=True,
+                    height=40,
+                    bgcolor=ft.Colors.WHITE if es_sel else None,
+                    border_radius=20,
+                    shadow=ft.BoxShadow(blur_radius=4, color=ft.Colors.BLACK12) if es_sel else None,
+                    on_click=lambda e, val=opcion: self.actualizar_frecuencia(val)
+                )
+            )
+                
+        return ft.Container(
+            content=ft.Row(botones, spacing=0),
+            bgcolor='#F2F2E7',
+            border_radius=25,
+            padding=5,
+        )
     
     def actualizar_semana(self, valor_seleccionado):
         self.estado_semana['semana'] = valor_seleccionado
