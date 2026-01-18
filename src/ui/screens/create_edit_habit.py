@@ -95,6 +95,11 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
 
         self.frecuencia_contenedor.content = crear_selector_frecuencia()
 
+        # Calendario - semana
+        self.semana_contenedor = ft.Container()
+        self.estado_semana = {'semana': 'Lunes'}
+        self.semana_contenedor.content = self.crear_selector_semana(self.estado_semana)
+
         self.content = ft.SafeArea(
             content=ft.Stack(
                 controls=[
@@ -109,6 +114,7 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
                             self.texto_medicion,
                             self.contenedor_medicion,
                             self.frecuencia_contenedor,
+                            self.semana_contenedor,
                             ft.ElevatedButton(
                                 text='Guardar',
                                 on_click=self.guardar_habito
@@ -135,3 +141,40 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
     def volver(self):
         return_route = self.page.client_storage.get('return_route') or '/'
         self.page.go(return_route)
+    
+    def actualizar_semana(self, valor_seleccionado):
+        self.estado_semana['semana'] = valor_seleccionado
+        self.semana_contenedor.content = self.crear_selector_semana(estado_semana=self.estado_semana)
+        self.page.update() 
+
+    def crear_selector_semana(self, estado_semana):
+        opciones = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
+        botones = []
+            
+        for opcion in opciones:
+            es_sel = opcion == estado_semana['semana']
+                
+            botones.append(
+                ft.Container(
+                    content=ft.Text(
+                        opcion, 
+                        color=ft.Colors.BLACK if es_sel else ft.Colors.GREY_700, 
+                        weight='bold' if es_sel else 'normal',
+                        size=10
+                    ),
+                    alignment=ft.alignment.center,
+                    expand=True,
+                    height=40,
+                    bgcolor=ft.Colors.WHITE if es_sel else None,
+                    border_radius=20,
+                    shadow=ft.BoxShadow(blur_radius=4, color=ft.Colors.BLACK12) if es_sel else None,
+                    on_click=lambda e, val=opcion: self.actualizar_semana(val)
+                )
+            )
+                
+        return ft.Container(
+            content=ft.Row(botones, spacing=0),
+            bgcolor='#F2F2E7',
+            border_radius=25,
+            padding=5,
+        )
