@@ -100,6 +100,37 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
             alignment=ft.MainAxisAlignment.START
         )
 
+        # Recordatorio
+        self.titulo_recordatorio = ft.Text(value='Recodatorio')
+        self.texto_recordatorio = ft.Text(value='Activar recordatorio', color=ft.Colors.BLACK)
+        self.texto_reci_notific = ft.Text(value='Recibe notificación', color=ft.Colors.BLACK)
+        self.swicht_on_off = ft.Switch()
+
+        self.contenedor_recordatorio = ft.Container(
+            content=ft.Row(
+                controls=[
+                    ft.Column(
+                        controls=[self.texto_recordatorio, self.texto_reci_notific],
+                        expand=True,
+                        spacing=0,
+                        horizontal_alignment=ft.CrossAxisAlignment.CENTER
+                    ),
+                    ft.Column(
+                        controls=[self.swicht_on_off],
+                        expand=True,
+                        alignment=ft.alignment.center,
+                        horizontal_alignment=ft.CrossAxisAlignment.END
+                        
+                    )
+                ],
+                # expand=True
+            ),
+            padding=10,
+            # margin=10,
+            bgcolor=ft.Colors.WHITE,
+            border_radius=10
+        )
+
         self.content = ft.SafeArea(
             content=ft.Stack(
                 controls=[
@@ -118,7 +149,8 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
                             ft.Container(
                                 padding=ft.padding.symmetric(horizontal=5),
                                 content=self.contenedor_medible
-                            ),                            
+                            ),
+                            self.contenedor_recordatorio,
                             ft.ElevatedButton(
                                 text='Guardar',
                                 on_click=self.guardar_habito
