@@ -62,6 +62,44 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
         self.estado_semana = {'semana': 'Lunes'}
         self.semana_contenedor.content = self.crear_selector_semana(self.estado_semana)
 
+        # Medición - Medible
+        self.titulo_medible = ft.Text(value='Meta')
+        self.input_medibles = ft.TextField(
+            border_radius=10
+        )
+        
+        self.lista_medibles = ft.Dropdown(
+            border_radius=10,
+            options=[
+                ft.DropdownOption(key='Páginas'),
+                ft.DropdownOption(key='Veces'),
+                ft.DropdownOption(key='Minutos')
+            ]
+        )
+
+        self.sub_contenedor_input_medible = ft.Container(
+            content=self.input_medibles,
+            col=4,
+            alignment=ft.alignment.center
+        )
+
+        self.sub_contenedor_lista_medible = ft.Container(
+            content=self.lista_medibles,
+            col=4,
+            alignment=ft.alignment.center
+        )
+
+        self.contenedor_medible = ft.ResponsiveRow(
+            controls=[
+                self.titulo_medible,
+                self.sub_contenedor_input_medible,
+                self.sub_contenedor_lista_medible,
+            ],
+            spacing=10,
+            run_spacing=0,
+            alignment=ft.MainAxisAlignment.START
+        )
+
         self.content = ft.SafeArea(
             content=ft.Stack(
                 controls=[
@@ -76,7 +114,11 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
                             self.texto_medicion,
                             self.contenedor_medicion,
                             self.frecuencia_contenedor,
-                            self.semana_contenedor,
+                            self.semana_contenedor,                            
+                            ft.Container(
+                                padding=ft.padding.symmetric(horizontal=5),
+                                content=self.contenedor_medible
+                            ),                            
                             ft.ElevatedButton(
                                 text='Guardar',
                                 on_click=self.guardar_habito
