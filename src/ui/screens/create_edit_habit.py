@@ -112,19 +112,23 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
         self.contenedor_recordatorio = ft.Container(
             content=ft.Row(
                 controls=[
-                    ft.Column(
-                        controls=[self.texto_recordatorio, self.texto_reci_notific],
-                        expand=True,
-                        spacing=0,
-                        horizontal_alignment=ft.CrossAxisAlignment.CENTER
+                    ft.Row(
+                        controls=[
+                            ft.Column(
+                                controls=[self.texto_recordatorio, self.texto_reci_notific],
+                                expand=True,
+                                spacing=0,
+                                horizontal_alignment=ft.CrossAxisAlignment.CENTER
+                            ),
+                            ft.Column(
+                                controls=[self.swicht_on_off],
+                                expand=True,
+                                alignment=ft.alignment.center,
+                                horizontal_alignment=ft.CrossAxisAlignment.END                        
+                            )
+                        ],
+                        expand=True                        
                     ),
-                    ft.Column(
-                        controls=[self.swicht_on_off],
-                        expand=True,
-                        alignment=ft.alignment.center,
-                        horizontal_alignment=ft.CrossAxisAlignment.END
-                        
-                    )
                 ],
                 # expand=True
             ),
