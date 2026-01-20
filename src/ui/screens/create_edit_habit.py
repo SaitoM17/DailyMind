@@ -106,6 +106,9 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
         self.texto_reci_notific = ft.Text(value='Recibe notificación', color=ft.Colors.BLACK)
         self.swicht_on_off = ft.Switch()
 
+        self.icono_hora = ft.Icon(name=ft.Icons.ACCESS_TIME_FILLED, color=ft.Colors.BLACK, weight=ft.FontWeight.BOLD)
+        self.texto_hora = ft.Text(value='Hora', color=ft.Colors.BLACK, weight=ft.FontWeight.BOLD)
+
         self.contenedor_recordatorio = ft.Container(
             content=ft.Row(
                 controls=[
