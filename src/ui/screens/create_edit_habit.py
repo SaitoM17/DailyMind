@@ -110,7 +110,7 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
         self.texto_hora = ft.Text(value='Hora', color=ft.Colors.BLACK, weight=ft.FontWeight.BOLD)
 
         self.contenedor_recordatorio = ft.Container(
-            content=ft.Row(
+            content=ft.Column(
                 controls=[
                     ft.Row(
                         controls=[
@@ -129,6 +129,7 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
                         ],
                         expand=True                        
                     ),
+                    ft.Divider(height=1, thickness=1, color="grey"),                    
                 ],
                 # expand=True
             ),
