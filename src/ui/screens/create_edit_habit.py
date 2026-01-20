@@ -152,18 +152,12 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
                     ft.Divider(height=1, thickness=1, color="grey"),
                     ft.Row(
                         controls=[
-                            ft.Column(
-                                controls=[
-                                    ft.Row(
-                                        controls=[
-                                            self.icono_hora,
-                                            self.texto_hora
-                                        ]
-                                    )
-                                ]
-                            ),
-                            ft.Column(
-                                controls=[self.reloj_input, self.contenedor_hora]
+                            ft.Container(
+                                content=ft.Row(
+                                    controls=[self.icono_hora, self.texto_hora],
+                                    spacing=10
+                                ),
+                                padding=ft.padding.only(left=28)
                             )
                         ]
                     )                    
