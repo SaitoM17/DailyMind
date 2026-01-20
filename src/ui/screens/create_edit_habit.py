@@ -109,6 +109,26 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
         self.icono_hora = ft.Icon(name=ft.Icons.ACCESS_TIME_FILLED, color=ft.Colors.BLACK, weight=ft.FontWeight.BOLD)
         self.texto_hora = ft.Text(value='Hora', color=ft.Colors.BLACK, weight=ft.FontWeight.BOLD)
 
+        self.hora = ft.Text(value='09 : 00 AM', color=ft.Colors.GREY_500)
+        self.contenedor_hora = ft.Container(
+            content=self.hora,
+            bgcolor="#F5F5F5",  
+            padding=ft.padding.symmetric(horizontal=35, vertical=10),            
+            border_radius=30,    
+            alignment=ft.alignment.center,
+            on_click=self.abrir_reloj
+        )
+        self.reloj_input = ft.TimePicker(
+            confirm_text="Confirmar",
+            error_invalid_text="Time out of range",
+            help_text="Seleccionar hora",
+            on_change=self.cambiar_hora,
+            time_picker_entry_mode=ft.TimePickerEntryMode.INPUT_ONLY
+        )
+
+        self.page.overlay.append(self.reloj_input)
+
+
         self.contenedor_recordatorio = ft.Container(
             content=ft.Column(
                 controls=[
@@ -141,6 +161,9 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
                                         ]
                                     )
                                 ]
+                            ),
+                            ft.Column(
+                                controls=[self.reloj_input, self.contenedor_hora]
                             )
                         ]
                     )                    
@@ -272,3 +295,19 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
             border_radius=25,
             padding=5,
         )
+
+    def abrir_reloj(self, _):
+        self.reloj_input.open = True
+        self.page.update()
+
+    def cambiar_hora(self, e):
+        if self.reloj_input.value:
+            t = self.reloj_input.value
+                        
+            hora_12 = t.hour if 0 < t.hour <= 12 else (t.hour - 12 if t.hour > 12 else 12)
+            periodo = "AM" if t.hour < 12 else "PM"
+                        
+            self.hora_seleccionada = f"{hora_12:02d} : {t.minute:02d} {periodo}"
+            
+            self.hora.value = self.hora_seleccionada
+            self.page.update()
