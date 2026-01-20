@@ -129,7 +129,21 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
                         ],
                         expand=True                        
                     ),
-                    ft.Divider(height=1, thickness=1, color="grey"),                    
+                    ft.Divider(height=1, thickness=1, color="grey"),
+                    ft.Row(
+                        controls=[
+                            ft.Column(
+                                controls=[
+                                    ft.Row(
+                                        controls=[
+                                            self.icono_hora,
+                                            self.texto_hora
+                                        ]
+                                    )
+                                ]
+                            )
+                        ]
+                    )                    
                 ],
                 # expand=True
             ),
