@@ -115,7 +115,7 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
             bgcolor="#F5F5F5",  
             padding=ft.padding.symmetric(horizontal=35, vertical=10),            
             border_radius=30,    
-            alignment=ft.alignment.center,
+            # alignment=ft.alignment.center,
             on_click=self.abrir_reloj
         )
         self.reloj_input = ft.TimePicker(
@@ -159,8 +159,12 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
                                 ),
                                 padding=ft.padding.only(left=28)
                             ),
-                            self.reloj_input,
-                            self.contenedor_hora                             
+                            ft.Column(
+                                controls=[self.reloj_input,self.contenedor_hora],
+                                expand=True,
+                                alignment=ft.alignment.center,
+                                horizontal_alignment=ft.CrossAxisAlignment.END
+                            )                             
                         ]
                     )                    
                 ],
