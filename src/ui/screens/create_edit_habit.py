@@ -104,7 +104,7 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
         self.titulo_recordatorio = ft.Text(value='Recodatorio')
         self.texto_recordatorio = ft.Text(value='Activar recordatorio', color=ft.Colors.BLACK)
         self.texto_reci_notific = ft.Text(value='Recibe notificación', color=ft.Colors.BLACK)
-        self.swicht_on_off = ft.Switch()
+        self.swicht_on_off = ft.Switch(on_change=self.swicht_cambio)
 
         self.icono_hora = ft.Icon(name=ft.Icons.ACCESS_TIME_FILLED, color=ft.Colors.BLACK, weight=ft.FontWeight.BOLD)
         self.texto_hora = ft.Text(value='Hora', color=ft.Colors.BLACK, weight=ft.FontWeight.BOLD)
@@ -311,3 +311,13 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
             
             self.hora.value = self.hora_seleccionada
             self.page.update()
+    
+    def swicht_cambio(self, e):
+        if self.swicht_on_off.value == True:
+            self.contenedor_hora.disabled = True
+            self.reloj_input.disabled = True
+        else:
+            self.contenedor_hora.disabled = False
+            self.reloj_input.disabled = False
+        
+        self.page.update()
