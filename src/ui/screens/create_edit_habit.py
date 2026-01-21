@@ -158,7 +158,9 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
                                     spacing=10
                                 ),
                                 padding=ft.padding.only(left=28)
-                            )
+                            ),
+                            self.reloj_input,
+                            self.contenedor_hora                             
                         ]
                     )                    
                 ],
