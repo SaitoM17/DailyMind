@@ -106,24 +106,25 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
         self.texto_reci_notific = ft.Text(value='Recibe notificación', color=ft.Colors.BLACK)
         self.swicht_on_off = ft.Switch(on_change=self.swicht_cambio)
 
-        self.icono_hora = ft.Icon(name=ft.Icons.ACCESS_TIME_FILLED, color=ft.Colors.BLACK, weight=ft.FontWeight.BOLD)
-        self.texto_hora = ft.Text(value='Hora', color=ft.Colors.BLACK, weight=ft.FontWeight.BOLD)
+        self.icono_hora = ft.Icon(name=ft.Icons.ACCESS_TIME_FILLED, color=ft.Colors.GREY_500, weight=ft.FontWeight.BOLD)
+        self.texto_hora = ft.Text(value='Hora', color=ft.Colors.GREY_500, weight=ft.FontWeight.BOLD)
 
         self.hora = ft.Text(value='09 : 00 AM', color=ft.Colors.GREY_500)
         self.contenedor_hora = ft.Container(
             content=self.hora,
             bgcolor="#F5F5F5",  
             padding=ft.padding.symmetric(horizontal=35, vertical=10),            
-            border_radius=30,    
-            # alignment=ft.alignment.center,
-            on_click=self.abrir_reloj
+            border_radius=30,                
+            on_click=self.abrir_reloj,
+            disabled=True,
         )
         self.reloj_input = ft.TimePicker(
             confirm_text="Confirmar",
             error_invalid_text="Time out of range",
             help_text="Seleccionar hora",
             on_change=self.cambiar_hora,
-            time_picker_entry_mode=ft.TimePickerEntryMode.INPUT_ONLY
+            time_picker_entry_mode=ft.TimePickerEntryMode.INPUT_ONLY,
+            disabled=True,
         )
 
         self.page.overlay.append(self.reloj_input)
@@ -314,10 +315,25 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
     
     def swicht_cambio(self, e):
         if self.swicht_on_off.value == True:
+            self.contenedor_hora.disabled = False
+            self.reloj_input.disabled = False        
+
+            self.icono_hora.color = ft.Colors.BLACK
+            self.icono_hora.weight = ft.FontWeight.BOLD
+            self.texto_hora.color = ft.Colors.BLACK
+            self.texto_hora.weight = ft.FontWeight.BOLD
+
+            self.hora.color = ft.Colors.BLACK
+
+        else:
             self.contenedor_hora.disabled = True
             self.reloj_input.disabled = True
-        else:
-            self.contenedor_hora.disabled = False
-            self.reloj_input.disabled = False
+            
+            self.icono_hora.color = ft.Colors.GREY_500
+            self.icono_hora.weight = ft.FontWeight.BOLD
+            self.texto_hora.color = ft.Colors.GREY_500
+            self.texto_hora.weight = ft.FontWeight.BOLD
+
+            self.hora.color = ft.Colors.GREY_500
         
         self.page.update()
