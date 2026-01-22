@@ -49,7 +49,8 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
                         active_color=ft.Colors.BLUE,
                     ),
                 ]
-            )
+            ),
+            on_change=self.activo_desact
         )
 
         # Frecuencia
@@ -97,7 +98,8 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
             ],
             spacing=10,
             run_spacing=0,
-            alignment=ft.MainAxisAlignment.START
+            alignment=ft.MainAxisAlignment.START,
+            visible=False
         )
 
         # Recordatorio
@@ -313,6 +315,14 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
             self.hora.value = self.hora_seleccionada
             self.page.update()
     
+    def activo_desact(self, e):
+        if self.contenedor_medicion.value == '2':
+            self.contenedor_medible.visible = True
+        else:
+            self.contenedor_medible.visible = False
+        
+        self.page.update()
+
     def swicht_cambio(self, e):
         if self.swicht_on_off.value == True:
             self.contenedor_hora.disabled = False
