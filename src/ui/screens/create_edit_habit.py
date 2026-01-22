@@ -179,6 +179,55 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
             border_radius=10
         )
 
+        # Boton de cancelar tarea
+        self.cancelar = ft.ElevatedButton(
+            content=ft.Row(
+                [
+                    ft.Text(value='Cancelar', size=20),
+                ],
+                tight=True,
+                spacing=10
+            ),
+            on_click=self.cancelar_habito,
+            expand=1,
+            style=ft.ButtonStyle(
+                    shape=ft.RoundedRectangleBorder(radius=15),
+                )
+        )
+
+        # Boton de guardar tarea
+        self.guardar = ft.ElevatedButton(
+            content=ft.Row(
+                [
+                    ft.Text('Guardar Tarea',size=20),
+                ],
+                tight=True,
+                spacing=10
+            ),
+            on_click=self.guardar_habito,
+            expand=1,
+            style=ft.ButtonStyle(
+                    shape=ft.RoundedRectangleBorder(radius=15),
+                )
+        )
+
+        # Contenedor Botones
+        self.botones_contenedor = ft.Column(
+            controls=[
+                ft.Row(
+                    controls=[
+                        self.cancelar,
+                        self.guardar
+                    ],
+                    alignment=ft.MainAxisAlignment.CENTER,
+                    vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                ),
+            ],
+            alignment=ft.MainAxisAlignment.END,
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            adaptive=True
+        )
+
         self.content = ft.SafeArea(
             content=ft.Stack(
                 controls=[
@@ -204,8 +253,10 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
                                 on_click=self.guardar_habito
                             )
                         ]
-                    )
-                ]
+                    ),
+                    self.botones_contenedor
+                ],
+                expand=True
             )
         )
 
@@ -219,7 +270,7 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
         
         self.volver()
 
-    def cancelar_tarea(self, e):
+    def cancelar_habito(self, e):
         self.volver()
     
     def volver(self):
