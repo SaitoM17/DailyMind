@@ -247,7 +247,8 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
                                 padding=ft.padding.symmetric(horizontal=5),
                                 content=self.contenedor_medible
                             ),
-                            self.contenedor_recordatorio
+                            self.contenedor_recordatorio,
+                            ft.Container(height=50)
                         ]
                     ),
                     self.botones_contenedor
