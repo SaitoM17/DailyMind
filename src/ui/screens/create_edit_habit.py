@@ -59,7 +59,7 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
         self.frecuencia_contenedor.content = self.crear_selector_frecuencia(self.estado_frecuencia)
 
         # Calendario - semana
-        self.semana_contenedor = ft.Container()
+        self.semana_contenedor = ft.Container(visible=False)
         self.estado_semana = {'semana': 'Lunes'}
         self.semana_contenedor.content = self.crear_selector_semana(self.estado_semana)
 
@@ -277,6 +277,12 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
     def actualizar_frecuencia(self, valor_seleccionado):
         self.estado_frecuencia['frecuencia'] = valor_seleccionado
         self.frecuencia_contenedor.content = self.crear_selector_frecuencia(estado_frecuencia=self.estado_frecuencia)
+        
+        if valor_seleccionado == 'Semanal':
+            self.semana_contenedor.visible = True
+        else:
+            self.semana_contenedor.visible = False
+        
         self.page.update() 
 
     def crear_selector_frecuencia(self, estado_frecuencia):
