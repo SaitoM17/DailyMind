@@ -179,7 +179,7 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
             border_radius=10
         )
 
-        # Boton de cancelar tarea
+        # Boton de cancelar hábito
         self.cancelar = ft.ElevatedButton(
             content=ft.Row(
                 [
@@ -195,11 +195,11 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
                 )
         )
 
-        # Boton de guardar tarea
+        # Boton de guardar hábito
         self.guardar = ft.ElevatedButton(
             content=ft.Row(
                 [
-                    ft.Text('Guardar Tarea',size=20),
+                    ft.Text('Guardar Hábito',size=20),
                 ],
                 tight=True,
                 spacing=10
