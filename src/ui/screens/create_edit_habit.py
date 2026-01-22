@@ -247,11 +247,7 @@ class CrearEditarEliminarHabitoScreen(ft.Container):
                                 padding=ft.padding.symmetric(horizontal=5),
                                 content=self.contenedor_medible
                             ),
-                            self.contenedor_recordatorio,
-                            ft.ElevatedButton(
-                                text='Guardar',
-                                on_click=self.guardar_habito
-                            )
+                            self.contenedor_recordatorio
                         ]
                     ),
                     self.botones_contenedor
